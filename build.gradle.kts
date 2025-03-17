@@ -26,7 +26,7 @@ kotlin {
     }
 
     sourceSets {
-      val commonMain by getting
+        val commonMain by getting
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
@@ -38,5 +38,34 @@ kotlin {
             }
         }
         val wasmJsTest by getting
+    }
+}
+
+tasks.named("compileKotlinWasmJs") {
+    dependsOn(tasks.named("generateBangs"))
+}
+
+tasks.register("generateBangs") {
+    doLast {
+        val generatedDir = File(
+            project.layout.projectDirectory.asFile,
+            "src/wasmJsMain/kotlin"
+        )
+        val outputFile = File(generatedDir, "data.kt")
+
+        if (!generatedDir.exists()) {
+            generatedDir.mkdirs()
+        }
+
+        val oneDayInMillis = 24 * 60 * 60 * 1000L
+        val fileExistsAndIsRecent = outputFile.exists() &&
+                (System.currentTimeMillis() - outputFile.lastModified() < oneDayInMillis)
+
+        if (!fileExistsAndIsRecent) {
+            exec {
+                commandLine("node", "./scripts/gen-bangs.js")
+                standardOutput = outputFile.outputStream()
+            }
+        }
     }
 }
