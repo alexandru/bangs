@@ -1,10 +1,12 @@
 
 val bangsData = arrayOf(
-  mapOf(
+  arrayOf(
     "01net" to "http://www.01net.com/recherche/recherche.php?searchstring={{{s}}}&chaine=home",
     "02faq" to "https://www.bmw2002faq.com/search/?q={{{s}}}",
     "0bo" to "http://boxofficemojo.com/search/?q={{{s}}}",
-    "0to255" to "http://0to255.com/{{{s}}}",
+    "0to255" to "http://0to255.com/{{{s}}}"
+  ),
+  arrayOf(
     "1001" to "http://1001boom.com/?s={{{s}}}",
     "1001fonts" to "http://www.1001fonts.com/search.html?search={{{s}}}&x=0&y=0",
     "101" to "http://www.101domain.com/domain-availability-search.htm?q={{{s}}}&sa.x=0&sa.y=0",
@@ -29,7 +31,9 @@ val bangsData = arrayOf(
     "1gabba" to "http://1gabba.net/frontpage?title={{{s}}}",
     "1mg" to "https://www.1mg.com/search/all?name={{{s}}}",
     "1p5" to "https://onepeterfive.com/?s={{{s}}}",
-    "1und1" to "https://www.1und1.de/suche?query={{{s}}}",
+    "1und1" to "https://www.1und1.de/suche?query={{{s}}}"
+  ),
+  arrayOf(
     "20m" to "http://www.20minutes.fr/search?q={{{s}}}",
     "24au" to "https://krsk.au.ru/nextauction/?search={{{s}}}",
     "24matins" to "http://www.24matins.fr/?s={{{s}}}",
@@ -46,7 +50,9 @@ val bangsData = arrayOf(
     "2hu" to "https://touhoudb.com/Search?filter={{{s}}}",
     "2nn" to "https://www.2nn.jp/word/{{{s}}}",
     "2pl" to "http://2player.com/search/?search={{{s}}}",
-    "2xmc" to "https://www.2xmoinscher.com/r?q={{{s}}}",
+    "2xmc" to "https://www.2xmoinscher.com/r?q={{{s}}}"
+  ),
+  arrayOf(
     "34travel" to "https://34travel.me/search?text={{{s}}}",
     "35c3" to "https://events.ccc.de/congress/2018/wiki/index.php?search={{{s}}}",
     "360" to "http://www.360skate.com/catalogsearch/result/?q={{{s}}} ",
@@ -63,7 +69,9 @@ val bangsData = arrayOf(
     "3gpp" to "http://www.3gpp.org/DynaReport/{{{s}}}.htm",
     "3m" to "http://www.trojmiasto.pl/s/{{{s}}}/",
     "3tailer" to "https://3tailer.com/search/?q={{{s}}}",
-    "3t" to "http://www.tritrans.net/cgibin/translate.cgi?spraak=Engelsk&Fra={{{s}}}&button=Translate%21",
+    "3t" to "http://www.tritrans.net/cgibin/translate.cgi?spraak=Engelsk&Fra={{{s}}}&button=Translate%21"
+  ),
+  arrayOf(
     "401games" to "https://store.401games.ca/pages/search-results?q={{{s}}}",
     "42" to "https://profile.intra.42.fr/searches/search?query={{{s}}}",
     "4" to "https://www.4fitnessrules.com/workout-videos/?frm_search={{{s}}}",
@@ -96,7 +104,9 @@ val bangsData = arrayOf(
     "4sound" to "http://www.4sound.dk/search/{{{s}}}",
     "4sq" to "https://foursquare.com/explore?mode=url&nearGeoId=&q={{{s}}}",
     "4x4community" to "http://www.4x4community.co.za/forum/threadloom/threadloom.php?query={{{s}}}",
-    "4x4direct" to "http://www.4x4direct.co.za/search?controller=search&orderby=position&orderway=desc&search_query={{{s}}}&submit_search=",
+    "4x4direct" to "http://www.4x4direct.co.za/search?controller=search&orderby=position&orderway=desc&search_query={{{s}}}&submit_search="
+  ),
+  arrayOf(
     "500" to "https://prime.500px.com/search/keywords={{{s}}}",
     "500px" to "https://500px.com/search?q={{{s}}}",
     "52" to "http://food52.com/recipes/search?q={{{s}}}",
@@ -107,13 +117,19 @@ val bangsData = arrayOf(
     "5e" to "http://engl393-dnd5th.wikia.com/wiki/Special:Search?query={{{s}}}",
     "5ew" to "http://dnd5e.wikidot.com/search:site/a/p/q/{{{s}}}",
     "5" to "http://fiverr.com/gigs/search?query={{{s}}}",
-    "5mods" to "https://www.gta5-mods.com/search/{{{s}}}",
-    "6pm" to "https://www.6pm.com/search?term={{{s}}}",
+    "5mods" to "https://www.gta5-mods.com/search/{{{s}}}"
+  ),
+  arrayOf(
+    "6pm" to "https://www.6pm.com/search?term={{{s}}}"
+  ),
+  arrayOf(
     "750g" to "https://www.750g.com/recherche.htm?search={{{s}}}",
     "7digital" to "https://www.7digital.com/search?q={{{s}}}",
     "7digitalno" to "https://no.7digital.com/search?q={{{s}}}",
     "7switch" to "https://www.7switch.com/fr/list/search/page/1?q={{{s}}}",
-    "7tv" to "https://www.7tv.de/suche?q={{{s}}}",
+    "7tv" to "https://www.7tv.de/suche?q={{{s}}}"
+  ),
+  arrayOf(
     "800" to "http://800notes.com/Phone.aspx/{{{s}}}",
     "8020" to "https://8020.net/freetextsearch/search/result/?keyword={{{s}}}",
     "80k" to "https://80000hours.org/search/?q={{{s}}}",
@@ -121,7 +137,9 @@ val bangsData = arrayOf(
     "8a" to "https://www.8a.nu/scorecard/Search.aspx?Mode=SIMPLE&AscentType=0&CragName={{{s}}}",
     "8chb" to "http://8ch.net/boards.php?title={{{s}}}",
     "8chc" to "http://8ch.net/{{{s}}}/catalog.html",
-    "8tracks" to "http://8tracks.com/explore/all?q={{{s}}}",
+    "8tracks" to "http://8tracks.com/explore/all?q={{{s}}}"
+  ),
+  arrayOf(
     "911" to "http://www.911tabs.com/search.php?search={{{s}}}&type=band",
     "911s" to "http://www.911tabs.com/search.php?search={{{s}}}&type=song",
     "91" to "http://www.91mobiles.com/topic/{{{s}}}/all",
@@ -135,7 +153,9 @@ val bangsData = arrayOf(
     "9" to "http://9pp.co/search?q={{{s}}}",
     "99quotes" to "https://99quotes.me/search?q={{{s}}}",
     "9g" to "http://9gag.com/search?query={{{s}}}",
-    "9gag" to "https://9gag.com/search?query={{{s}}}",
+    "9gag" to "https://9gag.com/search?query={{{s}}}"
+  ),
+  arrayOf(
     "a2" to "http://alternativeto.net/browse/search/?q={{{s}}}&ignoreExactMatch=true",
     "a5" to "https://v5.angular.io/api?query={{{s}}}",
     "a6" to "https://v6.angular.io/api?query={{{s}}}",
@@ -157,7 +177,6 @@ val bangsData = arrayOf(
     "aat" to "http://www.getty.edu/vow/AATServlet?english=N&find={{{s}}}&logic=AND&page=1&note=",
     "aau" to "https://www.amazon.com.au/s?k={{{s}}}",
     "aaw" to "http://aceattorney.wikia.com/wiki/{{{s}}}",
-    "àax" to "http://www.albumartexchange.com/covers?fltr=ALL&sort=TITLE&q={{{s}}}",
     "aax" to "http://www.albumartexchange.com/covers.php?q={{{s}}}",
     "abadise" to "https://dictionary.abadis.ir/?LnType=entofa&Word={{{s}}}",
     "abadisf" to "https://dictionary.abadis.ir/?lntype=fatoen&word={{{s}}}",
@@ -964,7 +983,6 @@ val bangsData = arrayOf(
     "awoiaf" to "http://awoiaf.westeros.org/index.php?search={{{s}}}&title=Special%3ASearch&go=Go",
     "aws" to "https://docs.aws.amazon.com/search/doc-search.html?searchPath=documentation&searchQuery={{{s}}} ",
     "ax" to "http://androidxref.com/5.1.0_r1/search?&project=abi&project=art&project=bionic&project=bootable&project=build&project=cts&project=dalvik&project=developers&project=development&project=device&project=docs&project=external&project=frameworks&project=hardware&project=libcore&project=libnativehelper&project=ndk&project=packages&project=pdk&project=prebuilts&project=sdk&project=system&project=tools&q={{{s}}}",
-    "äx" to "https://www.levykauppax.fi/search/?q={{{s}}}",
     "ay" to "https://www.aboutyou.de/suche?term={{{s}}}&search_source=ddgo",
     "ayrne" to "https://ayrne.io/?s={{{s}}}",
     "az" to "https://www.amazon.com/s?k={{{s}}}",
@@ -980,7 +998,9 @@ val bangsData = arrayOf(
     "azom" to "https://www.azom.com/search.aspx?q={{{s}}}&site=all&fsb=1",
     "azs" to "https://azspot.net/search/{{{s}}}",
     "azuk" to "https://www.amazon.co.uk/s?k={{{s}}}",
-    "azure" to "https://azure.microsoft.com/en-us/search/?q={{{s}}}",
+    "azure" to "https://azure.microsoft.com/en-us/search/?q={{{s}}}"
+  ),
+  arrayOf(
     "b0b" to "http://b0b.fr/?s={{{s}}}",
     "b3ta" to "http://b3ta.com/search/posts?q={{{s}}}",
     "b4kids" to "http://www.biology4kids.com/search.html?cx=partner-pub-9168758629909687%3A9553394167&cof=FORID%3A10&ie=UTF-8&q={{{s}}}&sa=Search",
@@ -1631,7 +1651,9 @@ val bangsData = arrayOf(
     "byte" to "https://www.byte-post.com/?s={{{s}}}",
     "byu" to "https://www.byu.edu/search-all?q={{{s}}}",
     "byui" to "https://www.byui.edu/search/result?q={{{s}}}",
-    "bztch" to "https://yadda.icm.edu.pl/baztech/search/page.action?q=sc.general*c_0all_0eq.{{{s}}}*l_0&qt=SEARCH",
+    "bztch" to "https://yadda.icm.edu.pl/baztech/search/page.action?q=sc.general*c_0all_0eq.{{{s}}}*l_0&qt=SEARCH"
+  ),
+  arrayOf(
     "c1024" to "http://www.commander1024.de/wordpress/?s={{{s}}}",
     "c21" to "https://www.channel21.de/catalogsearch/result/?q={{{s}}}",
     "c24" to "https://www.chrono24.com/search/index.htm?watchTypes=&query={{{s}}}&dosearch=true&searchexplain=1&accessoryTypes=",
@@ -2444,7 +2466,9 @@ val bangsData = arrayOf(
     "cyt" to "https://cadence.gq/cloudtube/search?q={{{s}}}&sort_by=relevance",
     "czc" to "http://www.czc.cz/search?q-fulltext={{{s}}}",
     "czk2eur" to "https://www.xe.com/currencyconverter/convert/?Amount={{{s}}}&From=CZK&To=EUR",
-    "cz" to "https://complexityzoo.uwaterloo.ca/index.php?search={{{s}}}&title=Special%3ASearch",
+    "cz" to "https://complexityzoo.uwaterloo.ca/index.php?search={{{s}}}&title=Special%3ASearch"
+  ),
+  arrayOf(
     "d1pkg" to "https://pkginfo.devuan.org/cgi-bin/d1pkgweb-query?search={{{s}}}&release=any",
     "d20pfsrd" to "http://www.d20pfsrd.com/system/app/pages/search?scope=search-site&q={{{s}}}",
     "d20srd" to "http://www.d20srd.org/search.htm?q={{{s}}}",
@@ -2518,7 +2542,6 @@ val bangsData = arrayOf(
     "datpiff" to "http://datpiff.com/mixtapes-search?criteria={{{s}}}&sort=rating",
     "daum" to "http://search.daum.net/search?w=tot&q={{{s}}}",
     "daumdic" to "http://dic.daum.net/search.do?q={{{s}}}",
-    "다음사전" to "http://dic.daum.net/search.do?q={{{s}}}",
     "dauser" to "http://{{{s}}}.deviantart.com",
     "davesgarden" to "http://davesgarden.com/sitewidesearch.php?q={{{s}}}",
     "davetiyebaski" to "http://www.davetiyebaski.net/arama?q={{{s}}}",
@@ -3174,7 +3197,6 @@ val bangsData = arrayOf(
     "duck.co" to "https://duck.co/search/{{{s}}}",
     "duckco" to "https://duck.co/search/{{{s}}}",
     "duckduckgo" to "https://duckduckgo.com/?q={{{s}}}",
-    "?" to "http://duckduckgo.com/?q={{{s}}}",
     "duckgoes" to "https://duckduckgo.com/?q={{{s}}}&kp=-1&k5=1&kah=wt-wt&kl=xl-es&kad=es_ES",
     "ducx" to "http://help.appducx.com/index.php?topic=doc/Search-Result/index_en.htm&q={{{s}}}",
     "duden" to "http://www.duden.de/suchen/dudenonline/{{{s}}}",
@@ -3221,7 +3243,9 @@ val bangsData = arrayOf(
     "dynamicrange" to "http://www.dr.loudness-war.info/index.php?search_artist={{{s}}}",
     "dynamite" to "http://dynamite.com/htmlfiles/search2.html?0=19&next0=&KMPZ={{{s}}}",
     "dyn" to "https://dynasty-scans.com/search?q={{{s}}}",
-    "dz" to "https://www.deezer.com/search/{{{s}}}",
+    "dz" to "https://www.deezer.com/search/{{{s}}}"
+  ),
+  arrayOf(
     "e1" to "https://www.e1.ru/news/search/?search={{{s}}}",
     "e2c" to "https://translate.google.com/#en/cs/{{{s}}}",
     "e2" to "http://everything2.com/title/{{{s}}}?searchy=search",
@@ -3790,7 +3814,9 @@ val bangsData = arrayOf(
     "eyeem" to "https://www.eyeem.com/search?q={{{s}}}&sort=relevance",
     "ezine" to "http://ezinearticles.com/search/?q={{{s}}}",
     "ezt" to "https://docops.ca.com/ca-easytrieve/11-6/en/search?q={{{s}}}&max=10&key=CAET116",
-    "ezydvd" to "http://www.ezydvd.com.au/search?q={{{s}}}&t=all",
+    "ezydvd" to "http://www.ezydvd.com.au/search?q={{{s}}}&t=all"
+  ),
+  arrayOf(
     "f1" to "http://www.f1zone.net/news/index.php?s={{{s}}}",
     "f3" to "http://www.france3.fr/recherche?s={{{s}}}",
     "f3nm" to "https://www.nexusmods.com/fallout3/search/?gsearch={{{s}}}&gsearchtype=mods",
@@ -3869,7 +3895,6 @@ val bangsData = arrayOf(
     "fbbva" to "http://www.fundeu.es/?s={{{s}}}",
     "fbee" to "https://framabee.org/?q={{{s}}} ",
     "fb" to "https://www.facebook.com/search.php/?q={{{s}}}",
-    "@fb" to "https://facebook.com/{{{s}}}",
     "fbg" to "https://duckduckgo.com/?q=site%3Afootballguys.com+{{{s}}}",
     "fbk" to "https://www.facebook.com/search/results/?q={{{s}}}",
     "fblite" to "https://mbasic.facebook.com/search/?refid=46&search=people&search_source=search_bar&query={{{s}}}",
@@ -3949,7 +3974,6 @@ val bangsData = arrayOf(
     "f" to "http://www.flickr.com/search/?q={{{s}}}",
     "ffm" to "https://fastfoodmusic.com/?s={{{s}}}",
     "ffn" to "https://www.fanfiction.net/search/?keywords={{{s}}}&ready=1&type=story",
-    "'f" to "https://www.fransktlexikon.se/{{{s}}}",
     "ffs" to "https://www.freefallsupport.com/?s={{{s}}}",
     "ffstory" to "https://www.fanfiction.net/search.php?keywords={{{s}}}&type=story&match=any&formatid=any&sort=0&genreid1=0&genreid2=0&characterid1=0&characterid2=0&characterid3=0&characterid4=0&words=0&ready=1&categoryid=0",
     "ffw" to "https://www.fanfiction.net/search.php?type=writer&keywords={{{s}}}&match=title&sort=0&genreid=0&subgenreid=0&characterid=0&subcharacterid=0&words=0&ready=1&categoryid=0#",
@@ -4318,7 +4342,9 @@ val bangsData = arrayOf(
     "fyndiq" to "https://fyndiq.se/search/?q={{{s}}}",
     "fyt" to "https://www.fiyatlab.com/?s={{{s}}}",
     "fyyd" to "https://fyyd.de/search?search={{{s}}}",
-    "fz" to "https://duckduckgo.com/?q=site%3Afz.se+{{{s}}}",
+    "fz" to "https://duckduckgo.com/?q=site%3Afz.se+{{{s}}}"
+  ),
+  arrayOf(
     "g100en" to "http://google.com/search?q={{{s}}}&tbo=1&num=100&lr=lang_en",
     "g100" to "http://google.com/search?q={{{s}}}&tbo=1&num=100",
     "g24" to "http://www.google.com/search?q={{{s}}}&tbs=qdr:d",
@@ -5399,7 +5425,9 @@ val bangsData = arrayOf(
     "gzc" to "https://www.google.com/search?q={{{s}}}&lr=lang_zh-CN",
     "gz" to "http://www.geekzone.fr/?s={{{s}}}",
     "gzh" to "http://www.geizhals.at/eu/?such={{{s}}}",
-    "gzric" to "http://www.giallozafferano.it/ricerca-ricette/{{{s}}} ",
+    "gzric" to "http://www.giallozafferano.it/ricerca-ricette/{{{s}}} "
+  ),
+  arrayOf(
     "h2g2" to "http://www.h2g2.com/search?search_type=article_quick_search&searchstring={{{s}}}&approved_entries_only_chk=1",
     "h2" to "http://www.h2olimpo.com/buscar?controller=search&orderby=position&orderway=desc&search_query={{{s}}}&submit_search=",
     "h2m" to "https://duckduckgo.com/?q={{{s}}}&sites=hard2mano.com",
@@ -5761,7 +5789,9 @@ val bangsData = arrayOf(
     "hyt" to "https://www.hytiva.com/search?searchString={{{s}}}",
     "hyts" to "https://www.hytiva.com/strains?searchString={{{s}}}",
     "hyvee" to "https://www.hy-vee.com/grocery/search?search={{{s}}}",
-    "hyves" to "http://www.hyves.nl/search/hyver/?searchterms={{{s}}}",
+    "hyves" to "http://www.hyves.nl/search/hyver/?searchterms={{{s}}}"
+  ),
+  arrayOf(
     "i3" to "https://www.i3-technologies.com/en/resources/knowledge-base/?q={{{s}}}",
     "iacac" to "https://iacac.aero/?s={{{s}}}",
     "iacobus" to "http://iacobus.usc.es/search*gag/?searchtype=Y&SORT=D&searcharg={{{s}}} ",
@@ -6158,7 +6188,9 @@ val bangsData = arrayOf(
     "ixl" to "https://ca.ixl.com/search?q={{{s}}}",
     "iyanmv" to "http://iyanmv.com/?s={{{s}}}",
     "iya" to "https://yandex.com/images/search?text={{{s}}}",
-    "izneo" to "http://www.izneo.com/search.html?pattern={{{s}}}",
+    "izneo" to "http://www.izneo.com/search.html?pattern={{{s}}}"
+  ),
+  arrayOf(
     "j2team" to "https://junookyo.blogspot.com/search?q={{{s}}}",
     "ja2en" to "https://translate.google.com/#ja/en/{{{s}}}",
     "jab" to "https://www.jabong.com/find/{{{s}}}",
@@ -6319,7 +6351,6 @@ val bangsData = arrayOf(
     "jsd" to "https://www.jsdelivr.com/?query={{{s}}}",
     "jshint" to "http://www.jshint.com/docs/options/#{{{s}}}",
     "jsinfo" to "https://javascript.info/search/?query={{{s}}}",
-    "/.j" to "http://slashdot.jp/index2.pl?fhfilter={{{s}}}",
     "jsm" to "https://junespringmultimedia.com/?s={{{s}}}&post_type=page",
     "js" to "https://developer.mozilla.org/en-US/search?topic=api&topic=js&q={{{s}}}",
     "jso" to "http://stackoverflow.com/search?q=[java]+{{{s}}}",
@@ -6371,7 +6402,9 @@ val bangsData = arrayOf(
     "jw" to "http://www.jw.org/en/search/?q={{{s}}}",
     "jwpepper" to "http://www.jwpepper.com/sheet-music/search.jsp?keywords={{{s}}}",
     "jwp" to "http://www.jwpepper.com/sheet-music/search.jsp?keywords={{{s}}}",
-    "jwse" to "https://www.justwatch.com/se/search?q={{{s}}}",
+    "jwse" to "https://www.justwatch.com/se/search?q={{{s}}}"
+  ),
+  arrayOf(
     "k8s" to "https://kubernetes.io/search/?q={{{s}}}",
     "kaartje" to "https://www.kaartje2go.nl/zoeken?q={{{s}}}",
     "kabum" to "https://www.kabum.com.br/cgi-local/site/listagem/listagem.cgi?string={{{s}}}&btnG=",
@@ -6641,7 +6674,9 @@ val bangsData = arrayOf(
     "kxref" to "https://code.kx.com/q/search?query={{{s}}}",
     "kym" to "http://knowyourmeme.com/search?utf8=%E2%9C%93&q={{{s}}}",
     "kyobo" to "https://search.kyobobook.co.kr/web/search?vPstrKeyWord={{{s}}}",
-    "kzs" to "http://www.kidzsearch.com/kzsearch.php?q={{{s}}}",
+    "kzs" to "http://www.kidzsearch.com/kzsearch.php?q={{{s}}}"
+  ),
+  arrayOf(
     "l1" to "https://level-1.fr/?s={{{s}}}",
     "l1sp" to "http://l1sp.org/search?q={{{s}}}",
     "l2d" to "http://www.love2d.org/w/index.php?search={{{s}}}",
@@ -7151,7 +7186,9 @@ val bangsData = arrayOf(
     "LzdMy" to "http://www.lazada.com.my/catalog/?q={{{s}}}",
     "lzdph" to "https://www.lazada.com.ph/catalog/?q={{{s}}}",
     "lzdsg" to "http://www.lazada.sg/catalog/?q={{{s}}}",
-    "lzdth" to "http://www.lazada.co.th/catalog/?q={{{s}}}",
+    "lzdth" to "http://www.lazada.co.th/catalog/?q={{{s}}}"
+  ),
+  arrayOf(
     "m163" to "http://music.163.com/#/search/m/?s={{{s}}}",
     "m1" to "https://www.motor1.com/search/?q={{{s}}}",
     "m3s" to "https://www.mp3skulls.icu/mp3/{{{s}}}.html",
@@ -7990,7 +8027,9 @@ val bangsData = arrayOf(
     "myt" to "https://music.youtube.com/search?q={{{s}}}",
     "myvidster" to "https://www.myvidster.com/search/?q={{{s}}}",
     "mywot" to "https://www.mywot.com/en/scorecard/{{{s}}}",
-    "mz" to "https://www.mittelbayerische.de/suche/?scope=20000&type=articles%2Cgalleries%2Cvideos&interval=month&searchterm={{{s}}}",
+    "mz" to "https://www.mittelbayerische.de/suche/?scope=20000&type=articles%2Cgalleries%2Cvideos&interval=month&searchterm={{{s}}}"
+  ),
+  arrayOf(
     "n11" to "http://www.n11.com/arama?q={{{s}}}",
     "n24" to "http://www.news24.com/search?q={{{s}}}",
     "naarden" to "http://www.naardensebijbel.nl/?search-class=DB_CustomSearch_Widget-db_customsearch_widget&widget_number=preset-default&-0=vers&cs-booknr-1=&cs-bijbelhoofdstuk-2=&cs-versnummer-3=&cs-bijbelvers_v2-4={{{s}}}&search=Zoeken",
@@ -8039,7 +8078,6 @@ val bangsData = arrayOf(
     "nautilus" to "http://nautil.us/search/{{{s}}}",
     "nava" to "http://www.navalactionwiki.com/index.php?title=Special%3ASearch&search={{{s}}}&go=Go",
     "naverdicfr" to "https://dict.naver.com/frkodict/#/search?query={{{s}}}",
-    "ㄴ" to "https://search.naver.com/search.naver?query={{{s}}}",
     "naver" to "http://search.naver.com/search.naver?where=nexearch&sm=osd&ie={inputEncoding}&query={{{s}}}",
     "navm" to "https://beta.map.naver.com/search/{{{s}}}",
     "nav" to "http://www.navigium.de/latein-woerterbuch.php?form={{{s}}}&wb=gross&phr=true&mh=true",
@@ -8115,7 +8153,6 @@ val bangsData = arrayOf(
     "netbsd" to "http://www.google.com/cse?cx=006277936787196004968:mbdhrauy1wm&q=guide&oq=guide&gs_l=partner.12...0.0.1.52071.0.0.0.0.0.0.0.0..0.0.gsnos%2Cn%3D13..0.0.0jj1..1ac.#gsc.tab=0&gsc.q={{{s}}}&gsc.page=1",
     "netcore2api" to "https://docs.microsoft.com/en-us/dotnet/api/?view=netcore-2.0&term={{{s}}}",
     "netcraft" to "http://toolbar.netcraft.com/site_report?url={{{s}}}",
-    ".net" to "http://www.searchdotnet.com/results.aspx?cx=002213837942349435108:jki1okx03jq&q={{{s}}}&sa=Search+.NET+sites&cof=FORID:9&siteurl=www.searchdotnet.com/",
     "netflixdvd" to "https://dvd.netflix.com/Search?v1={{{s}}}",
     "netflix" to "https://www.netflix.com/search?q={{{s}}}",
     "netgear" to "http://netgear.com/Search.aspx?q={{{s}}}",
@@ -8193,9 +8230,6 @@ val bangsData = arrayOf(
     "nhs" to "http://www.nhs.uk/Search/?q={{{s}}}",
     "nhw" to "https://nethackwiki.com/mediawiki/index.php?search={{{s}}}",
     "nicegear" to "http://nicegear.co.nz/search/?q={{{s}}}",
-
-  ),
-  mapOf(
     "nice" to "https://www.nice.org.uk/search?q={{{s}}}",
     "niche" to "https://www.niche.com/search/?q={{{s}}}",
     "nicodic" to "https://dic.nicovideo.jp/s/al/t/{{{s}}}/rev_created/desc/1-",
@@ -8401,7 +8435,9 @@ val bangsData = arrayOf(
     "nzlibraries" to "https://tepuna.on.worldcat.org/external-search?queryString={{{s}}}",
     "nzqa" to "https://search.nzqa.govt.nz/apps/search/?q={{{s}}}",
     "nzqas" to "https://www.nzqa.govt.nz/ncea/assessment/view-detailed.do?standardNumber={{{s}}}",
-    "nzz" to "http://www.nzz.ch/suche?form%5Bq%5D={{{s}}}",
+    "nzz" to "http://www.nzz.ch/suche?form%5Bq%5D={{{s}}}"
+  ),
+  arrayOf(
     "o2" to "https://www.o2.co.uk/shop/{{{s}}}",
     "oaad" to "https://www.oxfordlearnersdictionaries.com/definition/american_english/{{{s}}}",
     "oab" to "https://openaccessbutton.org/?url={{{s}}}",
@@ -8455,7 +8491,6 @@ val bangsData = arrayOf(
     "ods" to "http://public.opendatasoft.com/explore/dataset/european-train-stations/?q={{{s}}}",
     "oec" to "http://www.oeconsortium.org/courses/search/?search= {{{s}}} ",
     "oed" to "http://www.oed.com/search?searchType=dictionary&q={{{s}}}&_searchBtn=Search",
-    "õ" to "http://www.eki.ee/dict/qs/index.cgi?Q={{{s}}}",
     "oeis" to "http://oeis.org/search?q={{{s}}}&language=english&go=Search",
     "oel" to "https://affygility.com/oel/search.html?addsearch={{{s}}}",
     "oem" to "http://www.oemstrade.com/search/{{{s}}}",
@@ -8690,7 +8725,6 @@ val bangsData = arrayOf(
     "osc" to "https://oscobo.co.uk/search.php?q={{{s}}}",
     "osdev" to "https://wiki.osdev.org/index.php?title=Special%3ASearch&search={{{s}}}&fulltext=Search",
     "osdn" to "https://osdn.net/search/?iq={{{s}}}",
-    "õs" to "http://www.eki.ee/dict/qs/index.cgi?Q={{{s}}}",
     "osf" to "https://osf.io/search/?q={{{s}}}",
     "osi" to "http://opensource.org/search/node/{{{s}}}",
     "osl" to "http://libraries.io/search?q={{{s}}}",
@@ -8796,7 +8830,9 @@ val bangsData = arrayOf(
     "ozon" to "http://www.ozon.ru/?context=search&text={{{s}}}",
     "oz" to "http://oz.by/search/?q={{{s}}}",
     "ozsmoke.com.au" to "https://ozsmoke.com.au/search/?q={{{s}}}",
-    "ozstoners" to "https://cannabis.community.forums.ozstoners.com/index.php?app=core&module=search&do=search&andor_type=and&sid=58ffdab89aaeb17e49a50f52929f35d6&search_content=both&search_app_filters[ccs][searchInKey]=pages&search_app_filters[ccs][pages][sortKey]=date&search_app_filters[ccs][pages][sortDir]=0&search_app_filters[ccs][database_1][sortKey]=date_added&search_app_filters[ccs][database_1][sortDir]=0&search_term={{{s}}}&search_app=forums",
+    "ozstoners" to "https://cannabis.community.forums.ozstoners.com/index.php?app=core&module=search&do=search&andor_type=and&sid=58ffdab89aaeb17e49a50f52929f35d6&search_content=both&search_app_filters[ccs][searchInKey]=pages&search_app_filters[ccs][pages][sortKey]=date&search_app_filters[ccs][pages][sortDir]=0&search_app_filters[ccs][database_1][sortKey]=date_added&search_app_filters[ccs][database_1][sortDir]=0&search_term={{{s}}}&search_app=forums"
+  ),
+  arrayOf(
     "p4k" to "http://pitchfork.com/search/?query={{{s}}}",
     "p5" to "https://p5js.org/reference/#/p5/{{{s}}}",
     "p6mod" to "https://modules.perl6.org/search/?q={{{s}}}",
@@ -9530,7 +9566,9 @@ val bangsData = arrayOf(
     "python" to "https://docs.python.org/3/search.html?q={{{s}}}",
     "pytorch" to "https://pytorch.org/docs/stable/search.html?q={{{s}}}&check_keywords=yes&area=default",
     "pyvideo" to "http://pyvideo.org/search?models=videos.video&q={{{s}}}",
-    "pzw" to "https://pzwiki.net/w/index.php?search={{{s}}}",
+    "pzw" to "https://pzwiki.net/w/index.php?search={{{s}}}"
+  ),
+  arrayOf(
     "qat" to "http://quinapalus.com/cgi-bin/qat?pat={{{s}}}",
     "qaz" to "http://qaz.wtf/u/convert.cgi?text={{{s}}}",
     "qb" to "https://www.quimbee.com/search?q={{{s}}}",
@@ -9598,7 +9636,9 @@ val bangsData = arrayOf(
     "qwt" to "https://qwant.com/?q={{{s}}}",
     "qwv" to "https://www.qwant.com/?q={{{s}}}&t=videos",
     "qww" to "https://www.qwant.com/?q={{{s}}}&t=web",
-    "qz" to "http://qz.com/search/{{{s}}}",
+    "qz" to "http://qz.com/search/{{{s}}}"
+  ),
+  arrayOf(
     "r10" to "https://search.rakuten.co.jp/search/mall/{{{s}}}/",
     "r2r" to "https://www.rome2rio.com/map/{{{s}}}",
     "r2u" to "http://www.r2u.org.ua/s?w={{{s}}}&scope=all&dicts=all&highlight=on",
@@ -10120,7 +10160,9 @@ val bangsData = arrayOf(
     "rzelda" to "https://www.reddit.com/r/zelda/search/?q={{{s}}}",
     "rz" to "http://www.rhymezone.com/r/rhyme.cgi?Word={{{s}}}&typeofrhyme=perfect&org1=syl&org2=l&org3=y",
     "rzr" to "https://www.razer.com/search?text={{{s}}}",
-    "rztk" to "https://rozetka.com.ua/ua/search/?text={{{s}}}",
+    "rztk" to "https://rozetka.com.ua/ua/search/?text={{{s}}}"
+  ),
+  arrayOf(
     "s2" to "https://www.semanticscholar.org/search?q={{{s}}}",
     "s42" to "https://slice42.com/?s={{{s}}}",
     "s6all" to "http://society6.com/search/?q={{{s}}}",
@@ -10135,7 +10177,6 @@ val bangsData = arrayOf(
     "sab" to "https://duckduckgo.com/?q=site%3Askepticsannotatedbible.com+{{{s}}}&ia=web",
     "sack" to "https://www.sackmuehle.de/?s=({{{s}}})",
     "sacl" to "https://www.countrylife.co.za/?s={{{s}}}",
-    "/?s" to "https://activehi.com/?s={{{s}}}",
     "sade" to "https://smile.amazon.de/s/?field-keywords={{{s}}}",
     "safariext" to "https://safari-extensions.apple.com/?q={{{s}}}",
     "safari" to "https://www.safaribooksonline.com/search/?query={{{s}}}",
@@ -10596,8 +10637,6 @@ val bangsData = arrayOf(
     "slanggr" to "http://www.slang.gr/lemmas?q={{{s}}}",
     "slang" to "http://onlineslangdictionary.com/definition+of/{{{s}}}",
     "slant" to "http://www.slant.co/topics/?search={{{s}}}",
-    "/." to "http://slashdot.org/index2.pl?fhfilter={{{s}}}",
-    "./" to "http://slashdot.org/index2.pl?fhfilter={{{s}}}",
     "slashdot" to "http://slashdot.org/index2.pl?fhfilter={{{s}}}",
     "slatefr" to "https://www.slate.fr/search?mot-cle={{{s}}}",
     "slate" to "http://www.slate.com/search.html#search={{{s}}}",
@@ -11020,7 +11059,6 @@ val bangsData = arrayOf(
     "stmoritz" to "https://www.engadin.stmoritz.ch/suche/q.{{{s}}}/",
     "stm" to "http://stmblog.com/?s={{{s}}}",
     "stockcharts" to "http://stockcharts.com/h-sc/ui?s={{{s}}}&p=D&yr=0&mn=6&dy=0",
-    "\$" to "https://stockflare.com/#stocks/\${{{s}}} ",
     "stock" to "http://finance.google.com/?q={{{s}}}&sa=N&tab=fe",
     "stockphotos" to "http://www.istockphoto.com/file_search.php?action=file&text={{{s}}}",
     "stocksy" to "https://www.stocksy.com/search/{{{s}}}",
@@ -11205,7 +11243,9 @@ val bangsData = arrayOf(
     "szotar" to "https://www.szotar.net/mind/{{{s}}}/",
     "szpravy" to "https://www.seznam.cz/zpravy/hledani?q={{{s}}}&search--active=1",
     "sz" to "http://suche.sueddeutsche.de/news?search={{{s}}}",
-    "sztaki" to "http://szotar.sztaki.hu/search?searchWord={{{s}}}",
+    "sztaki" to "http://szotar.sztaki.hu/search?searchWord={{{s}}}"
+  ),
+  arrayOf(
     "t2g" to "http://www.time2game.be/index.php?main_page=advanced_search_result&search_in_description=1&keyword={{{s}}}",
     "t2w" to "https://{{{s}}}.tor2web.org/",
     "t3n" to "http://t3n.de/search?q={{{s}}}",
@@ -11904,7 +11944,6 @@ val bangsData = arrayOf(
     "twitch" to "https://twitch.tv/{{{s}}}",
     "twitters" to "https://twitter.com/{{{s}}}",
     "twitter" to "https://twitter.com/search?q={{{s}}}",
-    "@" to "https://twitter.com/{{{s}}}",
     "twitteruser" to "https://twitter.com/{{{s}}}",
     "twittv" to "https://twit.tv/search/{{{s}}}",
     "twit" to "https://twitter.com/search?q={{{s}}}",
@@ -11930,7 +11969,9 @@ val bangsData = arrayOf(
     "typo3" to "https://typo3.org/search/?tx_solr[q]={{{s}}}",
     "tyurl" to "https://tinyurl.com/create.php?source=indexpage&url={{{s}}}&submit=Make+TinyURL%21&alias= ",
     "ty" to "https://www.youtube.com/results?search_query={{{s}}}",
-    "tz" to "http://www.timeanddate.com/worldclock/results.html?query={{{s}}}",
+    "tz" to "http://www.timeanddate.com/worldclock/results.html?query={{{s}}}"
+  ),
+  arrayOf(
     "u24" to "http://www.urgente24.com/search/node/{{{s}}}",
     "uaar" to "http://www.uaar.it/news/?s={{{s}}}",
     "uappex" to "https://uappexplorer.com/apps?q={{{s}}}&sort=relevance",
@@ -12205,7 +12246,9 @@ val bangsData = arrayOf(
     "ux" to "http://ux.stackexchange.com/search?q={{{s}}}",
     "uym" to "https://www.unwrapyourmind.com/?s={{{s}}}&submit=Search",
     "uzg" to "https://www.npo.nl/zoeken?term={{{s}}}",
-    "uzh" to "http://www.uzh.ch/de/search.html?q={{{s}}}",
+    "uzh" to "http://www.uzh.ch/de/search.html?q={{{s}}}"
+  ),
+  arrayOf(
     "v2ex" to "https://www.duckduckgo.com/?q=site:v2ex.com/t+{{{s}}}",
     "v2ve" to "http://www.verb2verbe.com/EnglishConj.aspx?verb={{{s}}}&tail=&type=query",
     "v2vf" to "http://www.verb2verbe.com/francais/FrenchConj.aspx?verb={{{s}}}&tail=&ref=0&type=query",
@@ -12456,7 +12499,9 @@ val bangsData = arrayOf(
     "vw" to "https://wiki.voidlinux.org/index.php?search={{{s}}}&title=Special%3ASearch&go=Go",
     "vyavasthit" to "https://vyavasthit.com/?s={{{s}}}",
     "vy" to "https://www.vajehyab.com/?q={{{s}}}",
-    "vz" to "https://www.vz.lt/section/?template=search&search={{{s}}}",
+    "vz" to "https://www.vz.lt/section/?template=search&search={{{s}}}"
+  ),
+  arrayOf(
     "w0" to "https://www.wikizero.com/search.php?s={{{s}}}&lang=en",
     "w2fr" to "https://fr.wiki2.org/w/index.php?search={{{s}}}",
     "w2" to "https://en.wiki2.org/w/index.php?search={{{s}}}",
@@ -13230,7 +13275,9 @@ val bangsData = arrayOf(
     "wzh" to "http://zh.wikipedia.org/w/wiki.phtml?search={{{s}}}&go=Go",
     "wzl" to "https://www.weasyl.com/search?q={{{s}}}",
     "wz" to "https://www.warpzone.ms/?s={{{s}}} ",
-    "wzw" to "http://wiki.warpzone.ms/start?do=search&id={{{s}}}",
+    "wzw" to "http://wiki.warpzone.ms/start?do=search&id={{{s}}}"
+  ),
+  arrayOf(
     "x" to "https://x.com/search?q={{{s}}}",
     "x86" to "http://ref.x86asm.net/geek.html#{{{s}}}",
     "xamarinforums" to "http://forums.xamarin.com/search?Search={{{s}}}",
@@ -13275,7 +13322,9 @@ val bangsData = arrayOf(
     "xu" to "https://www.xavier.edu/search/?q={{{s}}}",
     "xvr" to "https://www.arxiv-vanity.com/convert/?query={{{s}}}",
     "xwiki" to "http://www.xwiki.org/xwiki/bin/view/Main/Search?text={{{s}}}",
-    "xxl" to "https://xxl.no/search?q={{{s}}}",
+    "xxl" to "https://xxl.no/search?q={{{s}}}"
+  ),
+  arrayOf(
     "y8" to "http://www.y8.com/search?utf8=%E2%9C%93&kind=game&q={{{s}}}",
     "yabla" to "https://chinese.yabla.com/chinese-english-pinyin-dictionary.php?define={{{s}}} ",
     "yacy" to "https://search.yacy.net/yacysearch/index.html?query={{{s}}}&Enter=&verify=false&nav=filetype%2Cprotocol%2Chosts%2Cauthors%2Ccollections%2Cnamespace%2Ctopics%2Cdate&startRecord=0&indexof=off&meanCount=5&resource=global&prefermaskfilter=&maximumRecords=10&timezoneOffset=0",
@@ -13444,7 +13493,9 @@ val bangsData = arrayOf(
     "yxmaps" to "https://maps.yandex.ru/?text={{{s}}}",
     "y" to "http://search.yahoo.com/search?p={{{s}}}",
     "yyh" to "http://yuyuhakusho.wikia.com/wiki/Special:Search?search={{{s}}}",
-    "yz" to "http://youzeek.com/?lng=RU#xPAGE_V3-Artist_%3Flng%3DRU%26Artist%3D{{{s}}}%26page%3DGeneral",
+    "yz" to "http://youzeek.com/?lng=RU#xPAGE_V3-Artist_%3Flng%3DRU%26Artist%3D{{{s}}}%26page%3DGeneral"
+  ),
+  arrayOf(
     "z100" to "http://www.z100.com/main.html/?q={{{s}}}",
     "z3s" to "https://zaufanatrzeciastrona.pl/?s={{{s}}}",
     "zabasearch" to "http://www.zabasearch.com/people/{{{s}}}",
@@ -13530,49 +13581,7 @@ val bangsData = arrayOf(
     "zxr" to "https://elixir.bootlin.com/zephyr/latest/ident/{{{s}}}",
     "zythom" to "https://duckduckgo.com/?q=site%3Azythom.blogspot.com+{{{s}}}",
     "zzounds" to "http://www.zzounds.com/prodsearch?q={{{s}}}",
-    "zz" to "http://www.zerozero.pt/search.php?op=all&inputString={{{s}}}",
-    "الاخبار" to "https://www.sahifatv.com/category/{{{s}}}",
-    "پخشستاره" to "https://setareh-co.com/?s={{{s}}}&submit=",
-    "تبسيط" to "https://tapseet.com/?s={{{s}}}",
-    "موبايل" to "https://mobilesacademy.com/?s={{{s}}}",
-    "و" to "https://ar.wikipedia.org/wiki/Special:Search?search={{{s}}}",
-    "ג" to "https://www.google.co.il/{{{s}}}",
-    "ויקי" to "https://he.wikipedia.org/w/index.php?search={{{s}}}&title=מיוחד%3Aחיפוש&go=לערך",
-    "חוק" to "https://he.wikisource.org/w/index.php?search=חוק+{{{s}}}",
-    "מורפיקס" to "http://www.morfix.co.il/{{{s}}}",
-    "פרוטוקול" to "https://www.protocol.co.il/?s={{{s}}}",
-    "Βικι" to "https://el.m.wikipedia.org/wiki/{{{s}}}",
-    "γ" to "https://www.google.gr/?gws_rd=ssl#q={{{s}}}",
-    "Λεξικό" to "https://el.m.wiktionary.org/wiki/{{{s}}}",
-    "ςγρ" to "https://el.wikipedia.org/wiki/?search={{{s}}}",
-    "υτ" to "https://www.youtube.com/results?search_query={{{s}}}",
-    "англяз" to "http://engramm.su/start?do=search&id={{{s}}}",
-    "в" to "https://uk.m.wikipedia.org/wiki/{{{s}}}",
-    "вики" to "https://ru.wikipedia.org/w/index.php?search={{{s}}}&",
-    "вн" to "https://ru.wikinews.org/wiki/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:%D0%9F%D0%BE%D0%B8%D1%81%D0%BA?search={{{s}}}",
-    "вс" to "https://ru.wiktionary.org/w/index.php?search={{{s}}}&ns0=1",
-    "г" to "https://google.com/search?hl=ru&q={{{s}}}",
-    "гбг" to "https://www.google.bg/search?source=hp&q={{{s}}}",
-    "гк" to "https://www.google.ru/search?q={{{s}}}&tbm=isch",
-    "гост" to "http://docs.cntd.ru/search/intellectual?q={{{s}}}",
-    "карты" to "https://yandex.ru/maps/?text={{{s}}}",
-    "кгут" to "https://translate.google.com/#ru/en/{{{s}}}",
-    "л" to "http://www.labirint.ru/search/{{{s}}}",
-    "мапс" to "https://www.google.bg/maps/search/{{{s}}}/",
-    "нпсд" to "https://npsd.party/?s={{{s}}}",
-    "п" to "https://www.google.com/search?q={{{s}}}",
-    "пш" to "https://www.google.ru/search?tbm=isch&q={{{s}}}",
-    "уики" to "https://bg.wikipedia.org/wiki/{{{s}}}",
-    "ц" to "https://ru.wikipedia.org/wiki/Special:Search?search={{{s}}}",
-    "ш" to "https://ru.wikipedia.org/w/index.php?search={{{s}}}",
-    "шру" to "https://ru.wikipedia.org/w/index.php?search={{{s}}}",
-    "я" to "https://yandex.ru/yandsearch?text={{{s}}}",
-    "як" to "https://yandex.ru/images/search?text={{{s}}}",
-    "яму" to "https://music.yandex.com/search?text={{{s}}}",
-    "ям" to "https://yandex.ru/maps/?text={{{s}}}",
-    "նայ" to "http://nayiri.com/search?l=hy_LB&dt=HY_HY&r=0&query={{{s}}}",
-    "ასტრო" to "http://astronet.ge/?s={{{s}}}"
+    "zz" to "http://www.zerozero.pt/search.php?op=all&inputString={{{s}}}"
   )
-
 )
 

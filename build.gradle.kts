@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) 
 }
 
-group = "me.user"
+group = "org.alexn.bangs"
 version = "1.0-SNAPSHOT"
 
 repositories {

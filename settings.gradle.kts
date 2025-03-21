@@ -1,4 +1,4 @@
-rootProject.name = "kotlin-wasm-browser-template"
+rootProject.name = "bangs"
 
 pluginManagement {
     resolutionStrategy {

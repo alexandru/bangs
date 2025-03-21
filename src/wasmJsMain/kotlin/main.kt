@@ -1,6 +1,4 @@
 import kotlinx.browser.window
-import kotlin.text.Regex
-import kotlinx.browser.document
 
 external fun decodeURIComponent(encodedURI: String): String
 
@@ -24,9 +22,16 @@ fun extractBangsFromQuery(rawQuery: String, bangChar: String = "!"): Array<Strin
 }
 
 fun findBangUrlByKey(key: String): String? {
+    val ch = key.getOrNull(0) ?: return null
+    val bangsData = when {
+        ch.isDigit() -> bangsData.getOrNull(ch - '0') ?: return null
+        ch.isLetter() -> bangsData.getOrNull(ch - 'a' + 10) ?: return null
+        else -> return null
+    }
+
     for (element in bangsData) {
-        val url = element[key]
-        if (url != null) return url
+        if (element.first == key)
+            return element.second
     }
     return null
 }
@@ -36,6 +41,7 @@ fun removeBangFromQuery(query: String, bang: String): String {
         .replaceLastRegex("(^|\\s+|\\b)[!]${Regex.escape(bang)}($|\\s+|\\b)", " ")
         .trim()
 }
+
 
 fun redirectToUrl(url: String) {
     window.location.replace(url)
