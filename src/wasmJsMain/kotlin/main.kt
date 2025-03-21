@@ -43,7 +43,9 @@ fun removeBangFromQuery(query: String, bang: String): String {
 }
 
 
-fun redirectToUrl(url: String) {
+fun redirectToUrl(url: String, debug: Boolean) {
+    if (debug)
+        throw Exception("Redirect to $url")
     window.location.replace(url)
 }
 
@@ -61,9 +63,10 @@ fun String.replaceLastRegex(regex: String, replacement: String): String {
 }
 
 fun main() {
+    val debug = getQueryParameter("debug") != null
     val rawQuery = getQueryParameter("q")
     if (rawQuery == null || rawQuery.isEmpty()) {
-        redirectToUrl(defaultSettings.defaultWebsite)
+        redirectToUrl(defaultSettings.defaultWebsite, debug)
         return
     }
 
@@ -85,5 +88,5 @@ fun main() {
     }
 
     val url = urlTemplate.replace("{{{s}}}", encodeURIComponent(query))
-    redirectToUrl(url)
+    redirectToUrl(url, debug)
 }
