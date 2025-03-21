@@ -6,7 +6,7 @@ fun getQueryParameter(name: String): String? {
     val url = window.location.search
     val regex = Regex("""[&?]${name}=([^&]*)""")
     val encodedValue = regex.find(url)?.groupValues?.get(1)
-    return encodedValue?.let { decodeURIComponent(it) }
+    return encodedValue?.let { decodeURIComponent(it).replace("+", " ") }
 }
 
 fun extractBangsFromQuery(rawQuery: String, bangChar: String = "!"): Array<String> {
