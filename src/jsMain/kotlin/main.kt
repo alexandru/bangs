@@ -27,16 +27,12 @@ fun extractBangsFromQuery(rawQuery: String, bangChar: String = "!"): Array<Strin
 }
 
 fun findBangUrlByKey(key: String): String? {
-    val ch = key.getOrNull(0) ?: return null
-    val bangsData = when {
-        ch.isDigit() -> bangsData.getOrNull(ch - '0') ?: return null
-        ch.isLetter() -> bangsData.getOrNull(ch - 'a' + 10) ?: return null
-        else -> return null
-    }
-
-    for (element in bangsData) {
-        if (element.first == key)
-            return element.second
+    for (bang in allBangs) {
+        for (bangKey in bang.keys) {
+            if (bangKey == key) {
+                return bang.url
+            }
+        }
     }
     return null
 }
