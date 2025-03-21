@@ -4,6 +4,6 @@
     <Description>Bangs</Description>
     <InputEncoding>UTF-8</InputEncoding>
     <Image width="16" height="16" type="image/x-icon">https://bangs.alexn.org/favicon.ico</Image>
-    <Url type="text/html" template="https://bangs.alexn.org/q={searchTerms}"/>
+    <Url type="text/html" template="https://bangs.alexn.org/search.html?q={searchTerms}"/>
     <Url type="application/x-suggestions+json" template="https://search.brave.com/api/suggest?q={searchTerms}"/>
 </OpenSearchDescription>
