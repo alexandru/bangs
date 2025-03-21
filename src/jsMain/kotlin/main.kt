@@ -14,35 +14,40 @@ fun getQueryParameter(name: String): String? {
     return fromString(window.location.search) ?: fromString(window.location.hash)
 }
 
-fun extractBangsFromQuery(rawQuery: String, bangChar: String = "!"): Array<String> {
+fun extractBangsFromQuery(rawQuery: String): Array<String> {
     val parts = rawQuery.split("\\s+".toRegex())
     val bangs = ArrayList<String>()
 
     for (i in parts.indices) {
-        if (parts[i].startsWith(bangChar)) {
+        if (parts[i].isNotEmpty() && defaultSettings.bangChars.contains(parts[i].take(1))) {
             bangs.add(parts[i].substring(1))
         }
     }
     return bangs.reversed().toTypedArray()
 }
 
-fun findBangUrlByKey(key: String): String? {
+fun findBangUrlByKey(key: String): Bang? {
     for (bang in allBangs) {
         for (bangKey in bang.keys) {
             if (bangKey == key) {
-                return bang.url
+                return bang
             }
         }
     }
     return null
 }
 
-fun removeBangFromQuery(query: String, bang: String): String {
+fun removeBangFromQuery(query: String, bang: String, replacement: String?): String {
+    val regex =
+        if (replacement == null)
+            "(^|\\s+|\\b)[${defaultSettings.bangChars}]${Regex.escape(bang)}($|\\s+|\\b)"
+        else
+            "(?<=^|\\b|\\s+)[${defaultSettings.bangChars}]${Regex.escape(bang)}(?=$|\\b|\\s+)"
+
     return query
-        .replaceLastRegex("(^|\\s+|\\b)[!]${Regex.escape(bang)}($|\\s+|\\b)", " ")
+        .replaceLastRegex(regex, replacement ?: " ")
         .trim()
 }
-
 
 fun redirectToUrl(url: String, debug: Boolean) {
     if (debug)
@@ -72,22 +77,22 @@ fun main() {
     }
 
     val bangs = extractBangsFromQuery(rawQuery)
-    var urlTemplate: String? = null
+    var foundBang: Bang? = null
     var query: String = rawQuery
 
     for (bang in bangs) {
-        urlTemplate = findBangUrlByKey(bang)
-        if (urlTemplate != null) {
-            query = removeBangFromQuery(rawQuery, bang)
+        foundBang = findBangUrlByKey(bang)
+        if (foundBang != null) {
+            query = removeBangFromQuery(rawQuery, bang, foundBang.searchContext)
             break
         }
     }
 
-    if (urlTemplate == null) {
+    if (foundBang == null) {
         // Defaults to Google
-        urlTemplate = findBangUrlByKey(defaultSettings.defaultBang)!!
+        foundBang = findBangUrlByKey(defaultSettings.defaultBang)!!
     }
 
-    val url = urlTemplate.replace("{{{s}}}", encodeURIComponent(query))
+    val url = foundBang.url.replace("{{{s}}}", encodeURIComponent(query))
     redirectToUrl(url, debug)
 }

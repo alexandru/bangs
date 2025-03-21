@@ -1,21 +1,27 @@
 data class Settings(
     val defaultBang: String,
-    val defaultWebsite: String
+    val defaultWebsite: String,
+    val bangChars: String,
 )
 
 data class Bang(
     val url: String,
-    val keys: Array<out String>
+    val keys: Array<out String>,
+    val searchContext: String?,
 ) {
     companion object {
         operator fun invoke(url: String, vararg keys: String) =
-            Bang(url, keys)
+            Bang(url, keys, searchContext = null)
+
+        fun ctx(url: String, searchContext: String, vararg keys: String) =
+            Bang(url, keys, searchContext)
     }
 }
 
 val defaultSettings = Settings(
     defaultBang = "g",
-    defaultWebsite = "https://www.google.com"
+    defaultWebsite = "https://www.google.com",
+    bangChars = "!@/"
 )
 
 val allBangs = arrayOf(
@@ -43,4 +49,13 @@ val allBangs = arrayOf(
     Bang("https://github.com/search?utf8=%E2%9C%93&q={{{s}}}", "git"),
     // Local
     Bang("https://dexonline.ro/definitie/{{{s}}}", "dex", "dexonline"),
+    // Programming
+    Bang("https://index.scala-lang.org/search?q={{{s}}}", "scaladex", "scalai"),
+    Bang("https://central.sonatype.com/search?q={{{s}}}", "maven", "mvn"),
+    Bang("https://www.scala-lang.org/api/current/index.html?search={{{s}}}", "scalaapi"),
+    Bang.ctx(
+        "https://search.brave.com/goggles?q={{{s}}}&source=web&goggles_id=https%3A%2F%2Fraw.githubusercontent.com%2Falexandru%2Fbangs%2Fmain%2Fgoogles%2Fscala",
+        "scala",
+        "scala", "sc"
+    ),
 )

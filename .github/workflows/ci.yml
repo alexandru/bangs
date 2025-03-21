@@ -19,7 +19,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Gradle Tasks
+    - name: Compile and Test
+      run: ./gradlew check
+
+    - name: Build distribution
       run: ./gradlew jsBrowserDistribution
 
     - name: Fix permissions

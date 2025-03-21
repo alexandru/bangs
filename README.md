@@ -1,22 +1,12 @@
 # Bangs
 
-## Development
+My own search interface, exposing custom "bangs" (see [DuckDuckGo](https://duckduckgo.com/bangs)). 
+Inspired by [unduck](https://github.com/t3dotgg/unduck).
 
-For running the application in development-mode:
+<https://bangs.alexn.org>
 
-```bash
-./gradlew wasmJsBrowserRun -t
-```
+---
 
-To build a production-ready distribution (available after the build in 
-`./build/dist/wasmJs/productionExecutable`):
-
-```bash
-./gradlew wasmJsBrowserDistribution
-```
-
-To run the application in the browser using the production-ready distribution:
-
-```bash
-./gradlew wasmJsBrowserProductionRun
-```
+> [!NOTE]
+> This UI supports just the list of bangs I care about, not the full list.
+> Meant for my own use, not for everyone.

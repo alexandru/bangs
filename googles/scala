@@ -1,0 +1,43 @@
+! name: Scala programming
+! description: Searches Scala APIs and documentation
+! public: true
+! author: Alexandru Nedelcu
+
+! Remove results not matching any other rule
+$discard
+
+! Generic boosting
+*scala*$boost=1,site=github.com
+*scala*$boost=1,site=gitlab.com
+*scala*$boost=1,site=youtube.com
+*scala*$boost=1,site=stackoverflow.com
+*scala*$boost=1,site=reddit.com
+
+/r/scala/$boost=2,site=reddit.com
+
+! Scala official channels
+$boost=3,site=scala-lang.org
+$boost=3,site=contributors.scala-lang.org
+$boost=3,site=teachers.scala-lang.org
+$boost=3,site=users.scala-lang.org
+$boost=3,site=docs.scala-lang.org
+$boost=3,site=scala-sbt.org
+$boost=3,site=scalameta.org
+
+! Community
+$boost=2,site=typelevel.org
+$boost=2,site=zio.dev
+$boost=2,site=index.scala-lang.org
+$boost=2,site=monix.io
+$boost=2,site=spark.apache.org
+$boost=2,site=discuss.akka.io
+$boost=2,site=scalatimes.com
+$boost=2,site=alvinalexander.com
+$boost=2,site=alexn.org
+$boost=2,site=mpilquist.github.io
+$boost=2,site=fs2.io
+$boost=2,site=circe.github.io
+$boost=2,site=rockthejvm.com
+$boost=2,site=akka.io
+$boost=2,site=softwaremill.com
+$boost=2,site=scala-exercises.org
