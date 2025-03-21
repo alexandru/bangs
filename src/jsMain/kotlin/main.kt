@@ -1,12 +1,17 @@
 import kotlinx.browser.window
 
 external fun decodeURIComponent(encodedURI: String): String
+external fun encodeURIComponent(uriComponent: String): String
 
 fun getQueryParameter(name: String): String? {
-    val url = window.location.search
-    val regex = Regex("""[&?]${name}=([^&]*)""")
-    val encodedValue = regex.find(url)?.groupValues?.get(1)
-    return encodedValue?.let { decodeURIComponent(it).replace("+", " ") }
+    fun fromString(url: String): String? {
+        val regex = Regex("""[&?#]${name}=([^&]*)""")
+        val encodedValue = regex.find(url)?.groupValues?.get(1)
+        return encodedValue?.let {
+            decodeURIComponent(it).replace("+", " ")
+        }
+    }
+    return fromString(window.location.search) ?: fromString(window.location.hash)
 }
 
 fun extractBangsFromQuery(rawQuery: String, bangChar: String = "!"): Array<String> {

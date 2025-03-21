@@ -12,7 +12,7 @@ repositories {
 }
 
 kotlin {
-    wasmJs {
+    js(IR) {
         binaries.executable()
         browser {
             commonWebpackConfig {
@@ -22,34 +22,29 @@ kotlin {
                     }
                 }
             }
+
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
         }
     }
 
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        val jsMain by getting {
             dependencies {
-                implementation(libs.kotlin.test)
+                implementation(kotlin("stdlib-js"))
             }
         }
-        val wasmJsMain by getting {
-            dependencies {
-                implementation(libs.kotlinx.browser)
-            }
-        }
-        val wasmJsTest by getting
     }
-}
-
-tasks.named("compileKotlinWasmJs") {
-    dependsOn(tasks.named("generateBangs"))
 }
 
 tasks.register("generateBangs") {
     doLast {
         val generatedDir = File(
             project.layout.projectDirectory.asFile,
-            "src/wasmJsMain/kotlin"
+            "src/jsMain/kotlin"
         )
         val outputFile = File(generatedDir, "data.kt")
 

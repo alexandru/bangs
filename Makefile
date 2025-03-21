@@ -1,19 +1,16 @@
 .PHONY: dist gen-bangs clean
 
-compile:
-	./gradlew compileTestKotlinWasmJs
-
-#gen-bangs:
-#	./scripts/gen-bangs.js > src/wasmJsMain/kotlin/data.kt
+gen-bangs:
+	./gradlew generateBangs
 
 dist:
-	./gradlew wasmJsBrowserDistribution
+	./gradlew jsBrowserDistribution
 
 clean:
 	./gradlew clean
 
 run-dev:
-	./gradlew wasmJsBrowserRun -t
+	./gradlew jsBrowserDevelopmentRun -t
 
 run-prod:
-	./gradlew wasmJsBrowserProductionRun
+	./gradlew jsBrowserProductionRun
