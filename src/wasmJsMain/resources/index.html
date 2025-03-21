@@ -2,10 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bangs</title>
-    <script src="bangs.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangs Search</title>
+    <link rel="search" type="application/opensearchdescription+xml" title="Bangs" href="search.xml">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        #app {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .search-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .search-input {
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            outline: none;
+            width: 100%;
+            -webkit-appearance: none;
+        }
+        .search-input:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 5px rgba(66, 133, 244, 0.3);
+        }
+        .search-button {
+            padding: 12px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            -webkit-appearance: none;
+        }
+        .search-button:hover {
+            background-color: #3367d6;
+        }
+        .search-button:active {
+            background-color: #2a56c6;
+        }
+        .bangs-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            padding: 0 5px;
+        }
+        @media (max-width: 480px) {
+            .search-container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            .search-input, .search-button {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .bangs-info {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div class="search-container">
+            <h1>Bangs Search</h1>
+            <form class="search-form" action="/search.html" method="GET">
+                <input type="text" class="search-input" name="q" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+            <div class="bangs-info">
+                <p>Try these bangs:</p>
+                <p>!g - Google, !w - Wikipedia, !yt - YouTube, !a - Amazon, !r - Reddit</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
