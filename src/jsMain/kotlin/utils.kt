@@ -21,17 +21,20 @@ fun writeCookie(name: String, value: String, daysUntilExpire: Int) {
 
 fun readSettingsFromCookie(): Settings? {
     val jsonStr = readCookie("settings") ?: return null
-    console.log(jsonStr)
+    console.log("Restoring settings: ", jsonStr)
     val json = JSON.parse<dynamic>(jsonStr)
-    console.log(json)
     return Settings(
-        defaultBang = json.defaultBang_1,
-        bangChars = json.bangChars_1,
+        defaultBang = (json["defaultBang"] as String?).nonEmptyOrNull() ?: Settings.default.defaultBang,
+        bangChars = (json["bangChars"] as String?).nonEmptyOrNull() ?: Settings.default.bangChars
     )
 }
 
 fun Settings.writeToCookie() {
-    val json = JSON.stringify(this)
+    val dict = js("{}")
+    dict["defaultBang"] = this.defaultBang
+    dict["bangChars"] = this.bangChars
+    val json = JSON.stringify(dict)
+    console.log("Saving settings: ", json)
     writeCookie("settings", json, daysUntilExpire = 365 * 10)
 }
 
@@ -93,6 +96,10 @@ fun redirectToUrl(url: String, debug: Boolean) {
     if (debug)
         throw Exception("Redirect to $url")
     window.location.replace(url)
+}
+
+fun String?.nonEmptyOrNull(): String? {
+    return if (this.isNullOrEmpty()) null else this
 }
 
 fun String.replaceLastRegex(regex: String, replacement: String): String {
