@@ -1,9 +1,4 @@
 
-val defaultSettings = Settings(
-    defaultBang = "g",
-    bangChars = "!@/"
-)
-
 val allBangs = arrayOf(
     // Brave
     Bang("https://search.brave.com/search?q={{{s}}}", "b"),

@@ -2,7 +2,14 @@
 data class Settings(
     val defaultBang: String,
     val bangChars: String,
-)
+) {
+    companion object{
+        val default = Settings(
+            defaultBang = "g",
+            bangChars = "!@/"
+        )
+    }
+}
 
 data class Bang(
     val url: String,

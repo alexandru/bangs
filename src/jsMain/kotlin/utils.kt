@@ -46,12 +46,15 @@ fun getQueryParameter(name: String): String? {
     return fromString(window.location.search) ?: fromString(window.location.hash)
 }
 
-fun extractBangsFromQuery(rawQuery: String): Array<String> {
+fun extractBangsFromQuery(
+    rawQuery: String,
+    settings: Settings
+): Array<String> {
     val parts = rawQuery.split("\\s+".toRegex())
     val bangs = ArrayList<String>()
 
     for (i in parts.indices) {
-        if (parts[i].isNotEmpty() && defaultSettings.bangChars.contains(parts[i].take(1))) {
+        if (parts[i].isNotEmpty() && settings.bangChars.contains(parts[i].take(1))) {
             bangs.add(parts[i].substring(1))
         }
     }
@@ -69,7 +72,12 @@ fun findBangUrlByKey(key: String): Bang? {
     return null
 }
 
-fun removeBangFromQuery(query: String, bang: String, replacement: String?): String {
+fun removeBangFromQuery(
+    query: String,
+    bang: String,
+    replacement: String?,
+    defaultSettings: Settings
+): String {
     val regex =
         if (replacement == null)
             "(^|\\s+|\\b)[${defaultSettings.bangChars}]${Regex.escape(bang)}($|\\s+|\\b)"
