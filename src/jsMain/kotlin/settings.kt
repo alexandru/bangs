@@ -33,4 +33,9 @@ val allBangs = arrayOf(
         "scala",
         "scala", "sc"
     ),
+    Bang.ctx(
+        "https://search.brave.com/goggles?q=json&source=web&goggles_id=https%3A%2F%2Fraw.githubusercontent.com%2Fbrave%2Fgoggles-quickstart%2Fmain%2Fgoggles%2Frust_programming.goggle",
+        "rust",
+        "rust", "rs"
+    ),
 )
