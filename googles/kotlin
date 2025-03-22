@@ -1,0 +1,31 @@
+! name: Kotlin programming
+! description: Searches Kotlin APIs and documentation
+! public: true
+! author: Alexandru Nedelcu
+
+! Remove results not matching any other rule
+$discard
+
+! Generic boosting
+*kotlin*$boost=1,site=github.com
+*kotlin*$boost=1,site=gitlab.com
+*kotlin*$boost=1,site=youtube.com
+*kotlin*$boost=1,site=stackoverflow.com
+*kotlin*$boost=1,site=reddit.com
+
+/r/kotlin/$boost=2,site=reddit.com
+
+! Official channels
+$boost=3,site=kotlinlang.org
+$boost=3,site=discuss.kotlinlang.org
+/kotlin/$boost=3,site=blog.jetbrains.com
+*kt*$boost=3,site=youtrack.jetbrains.com
+*kotlin*$boost=3,site=youtrack.jetbrains.com
+/kotlin/$boost=3,site=developer.android.com
+*kotlin*$boost=3,site=jetbrains.com
+$boost=3,site=ktor.io
+
+! Community
+$boost=3,site=talkingkotlin.com
+/JetBrains/$boost=3,site=github.com
+/Kotlin/$boost=3,site=github.com
