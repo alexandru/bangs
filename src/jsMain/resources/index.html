@@ -6,6 +6,7 @@
     <title>Bangs Search</title>
     <link rel="search" type="application/opensearchdescription+xml" title="Bangs" href="search.xml">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="bangs.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -103,7 +104,7 @@
     <div id="app">
         <div class="search-container">
             <h1>Bangs Search</h1>
-            <form class="search-form" action="/search.html" method="GET">
+            <form class="search-form" action="/search/" method="GET">
                 <input type="text" class="search-input" name="q" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus>
                 <button type="submit" class="search-button">Search</button>
             </form>

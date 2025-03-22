@@ -15,11 +15,16 @@ kotlin {
     js(IR) {
         binaries.executable()
         browser {
+            outputModuleName = "bangs"
+
             commonWebpackConfig {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     static = (static ?: mutableListOf()).apply {
                         add(project.rootDir.path)
                     }
+                }
+                cssSupport {
+                    enabled.set(false)
                 }
             }
 
