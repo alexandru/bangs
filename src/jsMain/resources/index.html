@@ -52,10 +52,12 @@
             outline: none;
             width: 100%;
             -webkit-appearance: none;
+            color: #888;
         }
         .search-input:focus, .settings-input:focus {
             border-color: #4285f4;
             box-shadow: 0 0 5px rgba(66, 133, 244, 0.3);
+            color: #333;
         }
         .search-button {
             padding: 12px;
@@ -84,50 +86,48 @@
         .search-button:active {
             background-color: #2a56c6;
         }
-        .bangs-info {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-            padding: 0 5px;
-        }
         .settings-label {
             font-size: 14px;
-            color: #333;
+            color: #666;
             margin-bottom: 5px;
             text-align: left;
         }
-        @media (max-width: 480px) {
-            .search-container, .settings-container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-            .search-input, .search-button, .settings-input {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .bangs-info, .settings-label {
-                font-size: 12px;
-            }
+        .settings-container h2 {
+            text-align: left;
+            font-size: 1rem;
+            font-style: italic;
+            color: #666;
+            padding: 0;
+            margin: 0 0 15px;
+        }
+        .search-container, .settings-container {
+            padding: 15px;
+        }
+        h1, h2 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .search-input, .search-button, .settings-input {
+            padding: 10px;
+            font-size: 14px;
+        }
+        .settings-label {
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        <div class="search-container">
-            <form class="search-form" action="/search/" method="GET">
+<div id="app">
+    <div class="search-container">
+        <form class="search-form" action="/search/" method="GET">
                 <input type="text" class="search-input" name="q" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus>
                 <button type="submit" class="search-button">
                     <img src="/assets/search.svg" alt="Search">
                 </button>
             </form>
-            <div class="bangs-info">
-                <p>!g - Google, !gh - GitHub, !w - Wikipedia, !yt - YouTube, !r - Reddit</p>
-            </div>
         </div>
         <div class="settings-container" id="settings">
+            <h2>Settings</h2>
             <form class="settings-form" id="settings-form">
                 <label class="settings-label" for="default-bang">Default bang</label>
                 <input type="text" class="settings-input" id="default-bang" name="default-bang">
