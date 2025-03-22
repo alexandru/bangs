@@ -38,4 +38,9 @@ val allBangs = arrayOf(
         "rust",
         "rust", "rs"
     ),
+    Bang.ctx(
+        "https://search.brave.com/goggles?q={{{s}}}&source=web&goggles_id=https%3A%2F%2Fraw.githubusercontent.com%2Falexandru%2Fbangs%2Fmain%2Fgoogles%2Fkotlin",
+        "kotlin",
+        "kotlin", "kt"
+    ),
 )
