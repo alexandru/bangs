@@ -60,4 +60,5 @@ jobs:
           DOMAIN_NAME: alexn.org
         run: |
           CF_ZONEID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" | jq -r '.result[] | "\(.id) \(.name)"' | grep "$DOMAIN_NAME" | cut -f1 -d" ")
+          echo "Invalidating Cloudflare cache for zone $CF_ZONEID"
           curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONEID/purge_cache" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" --data '{"purge_everything":true}'
