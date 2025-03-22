@@ -1,28 +1,3 @@
-data class Settings(
-    val defaultBang: String,
-    val defaultWebsite: String,
-    val bangChars: String,
-)
-
-data class Bang(
-    val url: String,
-    val keys: Array<out String>,
-    val searchContext: String?,
-) {
-    companion object {
-        operator fun invoke(url: String, vararg keys: String) =
-            Bang(url, keys, searchContext = null)
-
-        fun ctx(url: String, searchContext: String, vararg keys: String) =
-            Bang(url, keys, searchContext)
-    }
-}
-
-val defaultSettings = Settings(
-    defaultBang = "g",
-    defaultWebsite = "https://www.google.com",
-    bangChars = "!@/"
-)
 
 val allBangs = arrayOf(
     // Brave

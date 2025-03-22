@@ -1,98 +1,75 @@
+import kotlinx.browser.document
 import kotlinx.browser.window
+import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.events.Event
 
-external fun decodeURIComponent(encodedURI: String): String
-external fun encodeURIComponent(uriComponent: String): String
-
-fun getQueryParameter(name: String): String? {
-    fun fromString(url: String): String? {
-        val regex = Regex("""[&?#]${name}=([^&]*)""")
-        val encodedValue = regex.find(url)?.groupValues?.get(1)
-        return encodedValue?.let {
-            decodeURIComponent(it).replace("+", " ")
-        }
-    }
-    return fromString(window.location.search) ?: fromString(window.location.hash)
-}
-
-fun extractBangsFromQuery(rawQuery: String): Array<String> {
-    val parts = rawQuery.split("\\s+".toRegex())
-    val bangs = ArrayList<String>()
-
-    for (i in parts.indices) {
-        if (parts[i].isNotEmpty() && defaultSettings.bangChars.contains(parts[i].take(1))) {
-            bangs.add(parts[i].substring(1))
-        }
-    }
-    return bangs.reversed().toTypedArray()
-}
-
-fun findBangUrlByKey(key: String): Bang? {
-    for (bang in allBangs) {
-        for (bangKey in bang.keys) {
-            if (bangKey == key) {
-                return bang
-            }
-        }
-    }
-    return null
-}
-
-fun removeBangFromQuery(query: String, bang: String, replacement: String?): String {
-    val regex =
-        if (replacement == null)
-            "(^|\\s+|\\b)[${defaultSettings.bangChars}]${Regex.escape(bang)}($|\\s+|\\b)"
-        else
-            "(?<=^|\\b|\\s+)[${defaultSettings.bangChars}]${Regex.escape(bang)}(?=$|\\b|\\s+)"
-
-    return query
-        .replaceLastRegex(regex, replacement ?: " ")
-        .trim()
-}
-
-fun redirectToUrl(url: String, debug: Boolean) {
-    if (debug)
-        throw Exception("Redirect to $url")
-    window.location.replace(url)
-}
-
-fun String.replaceLastRegex(regex: String, replacement: String): String {
-    val pattern = regex.toRegex().findAll(this)
-    // Find the last match
-    var lastOccurrence = IntRange(-1, -1)
-    for (match in pattern) {
-        lastOccurrence = match.range
-    }
-    if (lastOccurrence.first == -1) {
-        return this
-    }
-    return this.replaceRange(lastOccurrence, replacement)
-}
-
-fun main() {
+fun triggerSearch() {
+    val settings = readSettingsFromCookie() ?: Settings.default
     val debug = getQueryParameter("debug") != null
     val rawQuery = getQueryParameter("q")
     if (rawQuery == null || rawQuery.isEmpty()) {
-        redirectToUrl(defaultSettings.defaultWebsite, debug)
-        return
+        return redirectToUrl(window.location.origin, debug)
     }
 
-    val bangs = extractBangsFromQuery(rawQuery)
+    val bangs = extractBangsFromQuery(rawQuery, settings)
     var foundBang: Bang? = null
     var query: String = rawQuery
 
     for (bang in bangs) {
         foundBang = findBangUrlByKey(bang)
         if (foundBang != null) {
-            query = removeBangFromQuery(rawQuery, bang, foundBang.searchContext)
+            query = removeBangFromQuery(
+                rawQuery,
+                bang,
+                foundBang.searchContext,
+                settings
+            )
             break
         }
     }
 
     if (foundBang == null) {
         // Defaults to Google
-        foundBang = findBangUrlByKey(defaultSettings.defaultBang)!!
+        foundBang = findBangUrlByKey(settings.defaultBang)!!
     }
 
     val url = foundBang.url.replace("{{{s}}}", encodeURIComponent(query))
     redirectToUrl(url, debug)
+}
+
+fun initHomePage() {
+    fun onSettingsChanged() {
+        val defaultBang =
+            document.getElementById("default-bang")?.let {
+                (it as HTMLInputElement).value
+            } ?: Settings.default.defaultBang
+        val bangChars =
+            document.getElementById("bang-chars")?.let {
+                (it as HTMLInputElement).value
+            } ?: Settings.default.bangChars
+
+        Settings(defaultBang, bangChars).writeToCookie()
+    }
+
+    val settings = readSettingsFromCookie() ?: Settings.default
+    document.getElementById("default-bang")?.let {
+        val input = it as HTMLInputElement
+        input.value = settings.defaultBang
+        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+    }
+    document.getElementById("bang-chars")?.let {
+        val input = it as HTMLInputElement
+        input.value = settings.bangChars
+        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+    }
+}
+
+fun main() {
+    if (window.location.pathname.startsWith("/search/")) {
+        return triggerSearch()
+    } else {
+        document.addEventListener("DOMContentLoaded", { _: Event ->
+            initHomePage()
+        })
+    }
 }
