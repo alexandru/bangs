@@ -27,24 +27,25 @@
             max-width: 600px;
             text-align: center;
         }
-        .search-container {
+        .search-container, .settings-container {
             background-color: white;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
+            margin-bottom: 20px;
         }
         h1 {
             color: #333;
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
-        .search-form {
+        .search-form, .settings-form {
             display: flex;
             flex-direction: column;
             width: 100%;
         }
-        .search-input {
+        .search-input, .settings-input {
             padding: 12px 15px;
             font-size: 16px;
             border: 1px solid #ddd;
@@ -54,7 +55,7 @@
             width: 100%;
             -webkit-appearance: none;
         }
-        .search-input:focus {
+        .search-input:focus, .settings-input:focus {
             border-color: #4285f4;
             box-shadow: 0 0 5px rgba(66, 133, 244, 0.3);
         }
@@ -82,19 +83,25 @@
             color: #666;
             padding: 0 5px;
         }
+        .settings-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
         @media (max-width: 480px) {
-            .search-container {
+            .search-container, .settings-container {
                 padding: 15px;
             }
             h1 {
                 font-size: 1.5rem;
                 margin-bottom: 15px;
             }
-            .search-input, .search-button {
+            .search-input, .search-button, .settings-input {
                 padding: 10px;
                 font-size: 14px;
             }
-            .bangs-info {
+            .bangs-info, .settings-label {
                 font-size: 12px;
             }
         }
@@ -111,6 +118,14 @@
             <div class="bangs-info">
                 <p>!g - Google, !gh - GitHub, !w - Wikipedia, !yt - YouTube, !r - Reddit</p>
             </div>
+        </div>
+        <div class="settings-container">
+            <form class="settings-form">
+                <label class="settings-label" for="default-bang">Default bang</label>
+                <input type="text" class="settings-input" id="default-bang" name="default-bang">
+                <label class="settings-label" for="bang-chars">Bang chars</label>
+                <input type="text" class="settings-input" id="bang-chars" name="bang-chars">
+            </form>
         </div>
     </div>
 </body>
