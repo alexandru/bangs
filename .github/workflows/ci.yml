@@ -6,7 +6,7 @@ on:
       
 jobs:
   build:
-    name: Build Kotlin/Wasm
+    name: Build Kotlin/JS
     runs-on: ubuntu-latest
     steps:
     - name: Set up JDK
@@ -30,23 +30,8 @@ jobs:
           echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
 
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: build/dist/js/productionExecutable/
-
-  deploy:
-    needs: build
-    permissions:
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        run: |
-          ./.github/scripts/deploy.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Deploy to GitHub Pages
+      run: |
+        ./.github/scripts/deploy.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
