@@ -1,6 +1,8 @@
+import generated.BUILD_GIT_COMMIT_SHA
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.events.Event
 
 fun triggerSearch() {
@@ -61,6 +63,11 @@ fun initHomePage() {
         val input = it as HTMLInputElement
         input.value = settings.bangChars
         input.addEventListener("input", { _: Event -> onSettingsChanged() })
+    }
+
+    document.getElementById("build-info")?.let {
+        val span = it as HTMLSpanElement
+        span.textContent = BUILD_GIT_COMMIT_SHA
     }
 }
 

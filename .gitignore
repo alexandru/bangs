@@ -23,5 +23,8 @@
 
 /build/
 
+# Our generated files
+src/jsMain/kotlin/generated/
+
 .idea
 .kotlin
