@@ -13,14 +13,14 @@ data class Settings(
 
 data class Bang(
     val url: String,
-    val keys: Array<out String>,
+    val keys: List<String>,
     val searchContext: String?,
 ) {
     companion object {
         operator fun invoke(url: String, vararg keys: String) =
-            Bang(url, keys, searchContext = null)
+            Bang(url, keys.toList(), searchContext = null)
 
         fun ctx(url: String, searchContext: String, vararg keys: String) =
-            Bang(url, keys, searchContext)
+            Bang(url, keys.toList(), searchContext)
     }
 }
