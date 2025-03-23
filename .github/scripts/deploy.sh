@@ -18,6 +18,7 @@ echo "Copying build output to temporary directory"
 rsync --filter='P .*' --delete-excluded -Pacv ./build/dist/js/productionExecutable/ "$TEMP_DIR"
 
 echo "Pushing to gh-pages"
+cd "$TEMP_DIR" || exit 1
 git add .
 git config user.name "Alexandru Nedelcu"
 git config user.email "noreply@alexn.org"
