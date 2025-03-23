@@ -38,7 +38,6 @@ jobs:
   deploy:
     needs: build
     permissions:
-      pages: write
       id-token: write
     environment:
       name: github-pages
@@ -47,18 +46,21 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-
-  invalidate-cache:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Invalidate Cloudflare Cache
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-          DOMAIN_NAME: alexn.org
         run: |
-          CF_ZONEID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" | jq -r '.result[] | "\(.id) \(.name)"' | grep "$DOMAIN_NAME" | cut -f1 -d" ")
-          echo "Invalidating Cloudflare cache for zone $CF_ZONEID"
-          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONEID/purge_cache" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" --data '{"purge_everything":true}'
+          ./scripts/deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#  invalidate-cache:
+#    needs: deploy
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Invalidate Cloudflare Cache
+#        env:
+#          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+#          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+#          DOMAIN_NAME: alexn.org
+#        run: |
+#          CF_ZONEID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" | jq -r '.result[] | "\(.id) \(.name)"' | grep "$DOMAIN_NAME" | cut -f1 -d" ")
+#          echo "Invalidating Cloudflare cache for zone $CF_ZONEID"
+#          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONEID/purge_cache" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" --data '{"purge_everything":true}'
