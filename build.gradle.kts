@@ -40,6 +40,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
+                implementation(devNpm("html-webpack-plugin", version = "5.6.3"))
             }
         }
         val jsTest by getting {
@@ -98,4 +99,10 @@ tasks.named("clean") {
     doLast {
         delete(File(project.layout.projectDirectory.asFile, "src/jsMain/kotlin/generated"))
     }
+}
+
+// This was needed for the `html-webpack-plugin` configuration to work
+// (configured in `webpack.config.d/config.js`)
+tasks.named("jsBrowserDistribution", Sync::class) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
