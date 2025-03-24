@@ -20,6 +20,16 @@ val allBangs = arrayOf(
     Bang("https://www.startpage.com/do/search?query=site:stackoverflow.com%20{{{s}}}", "sstackoverflow", "sso"),
     Bang("https://www.startpage.com/do/search?query=site:social.alexn.org%20{{{s}}}", "ssocial"),
     Bang("https://www.startpage.com/do/search?query=site:alexn.org%20{{{s}}}", "salexn"),
+    // Qwant
+    Bang("https://www.qwant.com/?q={{{s}}}", "q"),
+    Bang("https://www.qwant.com/?q=site:wikipedia.org%20{{{s}}}", "qwp"),
+    Bang("https://www.qwant.com/?q=site:news.ycombinator.com%20{{{s}}}", "qhn"),
+    Bang("https://www.qwant.com/?q=site:reddit.com%20{{{s}}}", "qr"),
+    Bang("https://www.qwant.com/?q=site:lobste.rs%20{{{s}}}", "qlobsters"),
+    Bang("https://www.qwant.com/?q=site:github.com%20{{{s}}}", "qgithub", "qgh"),
+    Bang("https://www.qwant.com/?q=site:stackoverflow.com%20{{{s}}}", "qstackoverflow", "qso"),
+    Bang("https://www.qwant.com/?q=site:social.alexn.org%20{{{s}}}", "qsocial"),
+    Bang("https://www.qwant.com/?q=site:alexn.org%20{{{s}}}", "qalexn"),
     // Google
     Bang("https://www.google.com/search?q={{{s}}}", "g", "google"),
     Bang("https://google.com/maps/place/{{{s}}}", "gm", "gmaps"),
