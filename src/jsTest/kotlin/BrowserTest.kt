@@ -12,7 +12,8 @@ class BrowserTest {
     fun readAndWriteSettings() {
         val settings = Settings(
             defaultBang = "blah",
-            bangChars = "!@/"
+            bangChars = "!@/",
+            browserId = null
         )
         settings.writeToCookie()
         val readSettings = readSettingsFromCookie()

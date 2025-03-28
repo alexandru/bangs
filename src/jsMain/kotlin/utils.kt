@@ -70,7 +70,7 @@ fun getQueryParameter(name: String): String? {
 
 fun extractBangsFromQuery(
     rawQuery: String,
-    settings: Settings
+    settings: Settings,
 ): Array<String> {
     val parts = rawQuery.split("\\s+".toRegex())
     val bangs = ArrayList<String>()
