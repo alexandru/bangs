@@ -5,6 +5,23 @@ import kotlinx.browser.window
 external fun decodeURIComponent(encodedURI: String): String
 external fun encodeURIComponent(uriComponent: String): String
 
+fun String?.nonEmptyOrNull(): String? {
+    return if (this.isNullOrEmpty()) null else this
+}
+
+fun String.replaceLastRegex(regex: String, replacement: String): String {
+    val pattern = regex.toRegex().findAll(this)
+    // Find the last match
+    var lastOccurrence = IntRange(-1, -1)
+    for (match in pattern) {
+        lastOccurrence = match.range
+    }
+    if (lastOccurrence.first == -1) {
+        return this
+    }
+    return this.replaceRange(lastOccurrence, replacement)
+}
+
 fun readCookie(name: String): String? {
     val cookieString = document.cookie
     val regex = Regex("""${name}=([^;]+)""")
@@ -24,8 +41,9 @@ fun readSettingsFromCookie(): Settings? {
     console.log("Restoring settings: ", jsonStr)
     val json = JSON.parse<dynamic>(jsonStr)
     return Settings(
+        browserId = (json["browserId"] as String?).nonEmptyOrNull() ?: Settings.default.browserId,
         defaultBang = (json["defaultBang"] as String?).nonEmptyOrNull() ?: Settings.default.defaultBang,
-        bangChars = (json["bangChars"] as String?).nonEmptyOrNull() ?: Settings.default.bangChars
+        bangChars = (json["bangChars"] as String?).nonEmptyOrNull() ?: Settings.default.bangChars,
     )
 }
 
@@ -33,6 +51,7 @@ fun Settings.writeToCookie() {
     val dict = js("{}")
     dict["defaultBang"] = this.defaultBang
     dict["bangChars"] = this.bangChars
+    dict["browserId"] = this.browserId
     val json = JSON.stringify(dict)
     console.log("Saving settings: ", json)
     writeCookie("settings", json, daysUntilExpire = 365 * 10)
@@ -98,20 +117,12 @@ fun redirectToUrl(url: String, debug: Boolean) {
     window.location.replace(url)
 }
 
-fun String?.nonEmptyOrNull(): String? {
-    return if (this.isNullOrEmpty()) null else this
+fun findReferral(settings: Settings, url: String): Referral? {
+    if (!url.contains("?")) return null
+    for (ref in allReferrals)
+        if (url.contains(ref.hostname) &&
+            settings.browserId?.contains(ref.browserId, ignoreCase = true) != false) {
+            return ref
+        }
+    return null
 }
-
-fun String.replaceLastRegex(regex: String, replacement: String): String {
-    val pattern = regex.toRegex().findAll(this)
-    // Find the last match
-    var lastOccurrence = IntRange(-1, -1)
-    for (match in pattern) {
-        lastOccurrence = match.range
-    }
-    if (lastOccurrence.first == -1) {
-        return this
-    }
-    return this.replaceRange(lastOccurrence, replacement)
-}
-

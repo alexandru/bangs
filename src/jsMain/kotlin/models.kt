@@ -1,12 +1,13 @@
-
 data class Settings(
     val defaultBang: String,
     val bangChars: String,
+    val browserId: String?
 ) {
     companion object{
         val default = Settings(
             defaultBang = "g",
-            bangChars = "!@/"
+            bangChars = "!@/",
+            browserId = null
         )
     }
 }
@@ -24,3 +25,9 @@ data class Bang(
             Bang(url, keys.toList(), searchContext)
     }
 }
+
+data class Referral(
+    val hostname: String,
+    val browserId: String,
+    val referral: String
+)

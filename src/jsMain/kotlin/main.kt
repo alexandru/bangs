@@ -35,7 +35,13 @@ fun triggerSearch() {
         foundBang = findBangUrlByKey(settings.defaultBang)!!
     }
 
-    val url = foundBang.url.replace("{{{s}}}", encodeURIComponent(query))
+    val url = run {
+        val ref = findReferral(settings, foundBang.url)
+        val s = encodeURIComponent(query) + run {
+            if (ref != null) "&${ref.referral}" else ""
+        }
+        foundBang.url.replace("{{{s}}}", s)
+    }
     redirectToUrl(url, debug)
 }
 
@@ -49,8 +55,12 @@ fun initHomePage() {
             document.getElementById("bang-chars")?.let {
                 (it as HTMLInputElement).value
             } ?: Settings.default.bangChars
+        val browserId =
+            document.getElementById("browser-id")?.let {
+                (it as HTMLInputElement).value
+            }.nonEmptyOrNull()
 
-        Settings(defaultBang, bangChars).writeToCookie()
+        Settings(defaultBang, bangChars, browserId).writeToCookie()
     }
 
     val settings = readSettingsFromCookie() ?: Settings.default
@@ -62,6 +72,11 @@ fun initHomePage() {
     document.getElementById("bang-chars")?.let {
         val input = it as HTMLInputElement
         input.value = settings.bangChars
+        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+    }
+    document.getElementById("browser-id")?.let {
+        val input = it as HTMLInputElement
+        input.value = settings.browserId ?: ""
         input.addEventListener("input", { _: Event -> onSettingsChanged() })
     }
 

@@ -1,3 +1,36 @@
+const val Firefox = "firefox"
+const val Vivaldi = "vivaldi"
+
+// I'd like my browser to get paid for my searches
+val allReferrals = arrayOf(
+    // Firefox
+    Referral(
+        browserId = Firefox,
+        hostname = "google.com",
+        referral = "client=firefox-b-d"
+    ),
+    Referral(
+        browserId = Firefox,
+        hostname = "duckduckgo.com",
+        referral = "t=ffab"
+    ),
+    // Vivaldi
+    Referral(
+        browserId = Vivaldi,
+        hostname ="startpage.com",
+        referral = "segment=startpage.vivaldi"
+    ),
+    Referral(
+        browserId = Vivaldi,
+        hostname = "qwant.com",
+        referral = "client=brz-vivaldi&t=web"
+    ),
+    Referral(
+        browserId = Vivaldi,
+        hostname = "duckduckgo.com",
+        referral = "t=vivaldi&ia=web"
+    ),
+)
 
 val allBangs = arrayOf(
     // Brave
@@ -30,6 +63,16 @@ val allBangs = arrayOf(
     Bang("https://www.qwant.com/?q=site:stackoverflow.com%20{{{s}}}", "qstackoverflow", "qso"),
     Bang("https://www.qwant.com/?q=site:social.alexn.org%20{{{s}}}", "qsocial"),
     Bang("https://www.qwant.com/?q=site:alexn.org%20{{{s}}}", "qalexn"),
+    // DuckDuckGo
+    Bang("https://duckduckgo.com/?q={{{s}}}", "ddg"),
+    Bang("https://duckduckgo.com/?q=site:wikipedia.org%20{{{s}}}", "ddgwp"),
+    Bang("https://duckduckgo.com/?q=site:news.ycombinator.com%20{{{s}}}", "ddghn"),
+    Bang("https://duckduckgo.com/?q=site:reddit.com%20{{{s}}}", "ddgr"),
+    Bang("https://duckduckgo.com/?q=site:lobste.rs%20{{{s}}}", "ddglobsters"),
+    Bang("https://duckduckgo.com/?q=site:github.com%20{{{s}}}", "ddggithub", "ddggh"),
+    Bang("https://duckduckgo.com/?q=site:stackoverflow.com%20{{{s}}}", "ddgstackoverflow", "ddgso"),
+    Bang("https://duckduckgo.com/?q=site:social.alexn.org%20{{{s}}}", "ddgsocial"),
+    Bang("https://duckduckgo.com/?q=site:alexn.org%20{{{s}}}", "ddgalexn"),
     // Google
     Bang("https://www.google.com/search?q={{{s}}}", "g", "google"),
     Bang("https://google.com/maps/place/{{{s}}}", "gm", "gmaps"),
