@@ -1,9 +1,8 @@
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
-                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
     <ShortName>Bangs</ShortName>
     <Description>Bangs</Description>
     <InputEncoding>UTF-8</InputEncoding>
     <Image width="16" height="16" type="image/x-icon">https://bangs.alexn.org/favicon.ico</Image>
-    <Url type="text/html" template="https://bangs.alexn.org/search/#q={searchTerms}"/>
-    <Url type="application/x-suggestions+json" template="https://search.brave.com/api/suggest?q={searchTerms}"/>
+    <Url type="text/html" method="GET" template="https://bangs.alexn.org/search/#q={searchTerms}"/>
+    <Url type="application/x-suggestions+json" method="GET" template="https://search.brave.com/api/suggest?q={searchTerms}"/>
 </OpenSearchDescription>
