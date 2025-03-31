@@ -117,11 +117,12 @@ fun redirectToUrl(url: String, debug: Boolean) {
     window.location.replace(url)
 }
 
-fun findReferral(settings: Settings, url: String): Referral? {
-    if (!url.contains("?")) return null
+fun findReferral(s: Settings, url: String): Referral? {
+    if (s.browserId == null || !url.contains("?")) {
+        return null
+    }
     for (ref in allReferrals)
-        if (url.contains(ref.hostname) &&
-            settings.browserId?.contains(ref.browserId, ignoreCase = true) != false) {
+        if (url.contains(ref.hostname) && s.browserId.contains(ref.browserId, ignoreCase = true)) {
             return ref
         }
     return null
