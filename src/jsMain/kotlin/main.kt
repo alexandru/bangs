@@ -6,9 +6,8 @@ import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.events.Event
 
 fun triggerSearch() {
-    val settings = readSettingsFromCookie() ?: Settings.default
+    val settings = overrideSettingsFromUrl(readSettingsFromCookie() ?: Settings.default)
     val debug = getQueryParameter("debug") != null
-    val isPrivate = getQueryParameter("private") != null
     val rawQuery = getQueryParameter("q")
     if (rawQuery == null || rawQuery.isEmpty()) {
         return redirectToUrl(window.location.origin, debug)
@@ -32,13 +31,7 @@ fun triggerSearch() {
     }
 
     if (foundBang == null) {
-        if (!isPrivate) {
-            // Defaults to Google, if no cookie is set
-            foundBang = findBangUrlByKey(settings.defaultBang)!!
-        } else {
-            // Defaults to StartPage for private searches
-            foundBang = findBangUrlByKey("sp")!!
-        }
+        foundBang = findBangUrlByKey(settings.defaultBang)!!
     }
 
     val url = run {

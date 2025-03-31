@@ -26,6 +26,16 @@ data class Bang(
     }
 }
 
+data class Query(
+    val query: String,
+    val keys: List<String>,
+) {
+    companion object {
+        operator fun invoke(query: String, vararg keys: String) =
+            Query(query, keys.toList())
+    }
+}
+
 data class Referral(
     val hostname: String,
     val browserId: String,

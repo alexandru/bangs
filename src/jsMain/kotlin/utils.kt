@@ -47,6 +47,17 @@ fun readSettingsFromCookie(): Settings? {
     )
 }
 
+fun overrideSettingsFromUrl(settings: Settings): Settings {
+    val browserId = getQueryParameter("browserId")
+    val defaultBang = getQueryParameter("defaultBang")
+    val bangChars = getQueryParameter("bangChars")
+    return Settings(
+        browserId = browserId ?: settings.browserId,
+        defaultBang = defaultBang ?: settings.defaultBang,
+        bangChars = bangChars ?: settings.bangChars,
+    )
+}
+
 fun Settings.writeToCookie() {
     val dict = js("{}")
     dict["defaultBang"] = this.defaultBang
@@ -65,7 +76,9 @@ fun getQueryParameter(name: String): String? {
             decodeURIComponent(it).replace("+", " ")
         }
     }
-    return fromString(window.location.search) ?: fromString(window.location.hash)
+    return (fromString(window.location.search) ?: fromString(window.location.hash))
+        ?.trim()
+        .nonEmptyOrNull()
 }
 
 fun extractBangsFromQuery(
@@ -84,10 +97,32 @@ fun extractBangsFromQuery(
 }
 
 fun findBangUrlByKey(key: String): Bang? {
-    for (bang in allBangs) {
+    // Special-purpose searches take precedence
+    for (bang in SpecialPurposeEngines) {
         for (bangKey in bang.keys) {
             if (bangKey == key) {
                 return bang
+            }
+        }
+    }
+    // Search through general-purpose engines
+    for (engine in GeneralPurposeEngines) {
+        for (engineKey in engine.keys) {
+            if (engineKey == key)
+                return engine
+            else if (key.startsWith(engineKey)) {
+                // Do we have a sub-query?
+                val subkey = key.substring(engineKey.length)
+                for (query in Queries) {
+                    for (queryKey in query.keys) {
+                        if (queryKey == subkey)
+                            return Bang(
+                                url = engine.url.replace("{{{s}}}", query.query),
+                                keys = listOf(engineKey + queryKey),
+                                searchContext = null
+                            )
+                    }
+                }
             }
         }
     }
@@ -121,7 +156,7 @@ fun findReferral(s: Settings, url: String): Referral? {
     if (s.browserId == null || !url.contains("?")) {
         return null
     }
-    for (ref in allReferrals)
+    for (ref in Referrals)
         if (url.contains(ref.hostname) && s.browserId.contains(ref.browserId, ignoreCase = true)) {
             return ref
         }
