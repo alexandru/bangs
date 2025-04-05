@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangs Search</title>
-    <link rel="search" type="application/opensearchdescription+xml" title="Bangs" href="search.xml">
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Bangs" href="search.xml">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         * {
@@ -161,27 +162,33 @@
 <body>
 <div id="app">
     <div class="search-container">
-        <form class="search-form" action="/search/" method="GET">
-                <input type="text" class="search-input" name="q" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus>
-                <button type="submit" class="search-button">
-                    <img src="/assets/search.svg" alt="Search">
-                </button>
-            </form>
-        </div>
-        <div class="settings-container" id="settings">
-            <h2>Settings</h2>
-            <form class="settings-form" id="settings-form">
-                <label class="settings-label" for="default-bang">Default bang</label>
-                <input type="text" class="settings-input" id="default-bang" name="default-bang">
-                <label class="settings-label" for="bang-chars">Bang chars</label>
-                <input type="text" class="settings-input" id="bang-chars" name="bang-chars">
-                <label class="settings-label" for="browser-id">Browser ID</label>
-                <input type="text" class="settings-input" id="browser-id" name="browser-id" placeholder="e.g., firefox, vivaldi">
-            </form>
-        </div>
+        <form class="search-form" action="/search/" method="GET" id="search-form">
+            <input type="text" class="search-input" name="q" id="search-input"
+                   placeholder="Search with bangs (e.g., !w for Wikipedia)"
+                   autofocus>
+            <button type="submit" class="search-button">
+                <img src="/assets/search.svg" alt="Search">
+            </button>
+        </form>
     </div>
-    <footer>
-        <p><span id="build-info"></span> / <a href="https://github.com/alexandru/bangs" target="_blank">View on GitHub</a></p>
-    </footer>
+    <div class="settings-container" id="settings">
+        <h2>Settings</h2>
+        <form class="settings-form" id="settings-form">
+            <label class="settings-label" for="default-bang">Default bang</label>
+            <input type="text" class="settings-input" id="default-bang" name="default-bang">
+            <label class="settings-label" for="bang-chars">Bang chars</label>
+            <input type="text" class="settings-input" id="bang-chars" name="bang-chars">
+            <label class="settings-label" for="browser-id">Browser ID</label>
+            <input type="text" class="settings-input" id="browser-id"
+                   name="browser-id"
+                   placeholder="e.g., firefox, firefox-mobile, vivaldi">
+        </form>
+    </div>
+</div>
+<footer>
+    <p><span id="build-info"></span> / <a
+            href="https://github.com/alexandru/bangs" target="_blank">View on
+        GitHub</a></p>
+</footer>
 </body>
 </html>

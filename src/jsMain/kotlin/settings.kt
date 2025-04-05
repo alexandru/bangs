@@ -1,4 +1,5 @@
 const val Firefox = "firefox"
+const val FirefoxMobile = "firefox-mobile"
 const val Vivaldi = "vivaldi"
 
 /**
@@ -14,6 +15,17 @@ val Referrals = arrayOf(
     ),
     Referral(
         browserId = Firefox,
+        hostname = "duckduckgo.com",
+        referral = "t=ffab"
+    ),
+    // Firefox Mobile
+    Referral(
+        browserId = FirefoxMobile,
+        hostname = "google.com",
+        referral = "client=firefox-b-m"
+    ),
+    Referral(
+        browserId = FirefoxMobile,
         hostname = "duckduckgo.com",
         referral = "t=ffab"
     ),

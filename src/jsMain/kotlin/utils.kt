@@ -157,7 +157,7 @@ fun findReferral(s: Settings, url: String): Referral? {
         return null
     }
     for (ref in Referrals)
-        if (url.contains(ref.hostname) && s.browserId.contains(ref.browserId, ignoreCase = true)) {
+        if (url.contains(ref.hostname) && s.browserId.equals(ref.browserId.trim(), ignoreCase = true)) {
             return ref
         }
     return null

@@ -62,23 +62,35 @@ fun initHomePage() {
         Settings(defaultBang, bangChars, browserId).writeToCookie()
     }
 
+    // Initialize search form
+    val form = document.getElementById("search-form")
+    val input = document.getElementById("search-input") as HTMLInputElement
+    form?.addEventListener("submit", { e: Event ->
+        if (input.value.trim().isNotEmpty()) {
+            e.preventDefault()
+            window.location.href = "/search/#q=" + encodeURIComponent(input.value)
+        }
+    })
+
+    // Initialize settings form
     val settings = readSettingsFromCookie() ?: Settings.default
     document.getElementById("default-bang")?.let {
-        val input = it as HTMLInputElement
-        input.value = settings.defaultBang
-        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+        val fi = it as HTMLInputElement
+        fi.value = settings.defaultBang
+        fi.addEventListener("input", { _: Event -> onSettingsChanged() })
     }
     document.getElementById("bang-chars")?.let {
-        val input = it as HTMLInputElement
-        input.value = settings.bangChars
-        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+        val fi = it as HTMLInputElement
+        fi.value = settings.bangChars
+        fi.addEventListener("input", { _: Event -> onSettingsChanged() })
     }
     document.getElementById("browser-id")?.let {
-        val input = it as HTMLInputElement
-        input.value = settings.browserId ?: ""
-        input.addEventListener("input", { _: Event -> onSettingsChanged() })
+        val fi = it as HTMLInputElement
+        fi.value = settings.browserId ?: ""
+        fi.addEventListener("input", { _: Event -> onSettingsChanged() })
     }
 
+    // Initialize build info
     document.getElementById("build-info")?.let {
         val span = it as HTMLSpanElement
         span.textContent = BUILD_GIT_COMMIT_SHA
