@@ -31,7 +31,8 @@ fun triggerSearch() {
     }
 
     if (foundBang == null) {
-        foundBang = findBangUrlByKey(settings.defaultBang)!!
+        foundBang = findBangUrlByKey(settings.defaultBang) ?:
+                findBangUrlByKey(DefaultBangDefault)!!
     }
 
     val url = run {
