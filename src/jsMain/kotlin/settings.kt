@@ -120,4 +120,8 @@ val SpecialPurposeEngines = arrayOf(
         "kotlin",
         "kotlin", "kt"
     ),
+    // AI/LLM
+    Bang("https://chatgpt.com/?q={{{s}}}&hints=search", "gpt", "chatgpt", "ai", "aig"),
+    Bang("https://chat.mistral.ai/chat?q={{{s}}}", "mistral", "aim"),
+    Bang("https://www.perplexity.ai/search/?q={{{s}}}", "perplexity", "aip"),
 )
