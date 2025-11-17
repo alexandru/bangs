@@ -3,7 +3,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("com.github.ben-manes.versions") version "0.52.0"
+    id("com.github.ben-manes.versions") version "0.53.0"
 }
 
 group = "org.alexn.bangs"
@@ -63,14 +63,16 @@ tasks.register("generateGitCommitSha") {
             generatedDir.mkdirs()
         }
 
-        // Execute git command and capture output to a temporary file
-        exec {
-            commandLine("git", "rev-parse", "HEAD")
-            standardOutput = tempFile.outputStream()
+        // Execute git command and capture output
+        val commitSha = run {
+            val gitOutput =
+                providers.exec {
+                    commandLine("git", "rev-parse", "HEAD")
+                }.standardOutput.asText.get()
+            // Get the first 7 characters of the commit SHA
+            gitOutput.trim().take(7)
         }
 
-        // Read from temp file and write to the actual output file
-        val commitSha = tempFile.readText().trim().take(7)
         outputFile.writeText(
             """
             package generated

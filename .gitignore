@@ -28,3 +28,4 @@ src/jsMain/kotlin/generated/
 
 .idea
 .kotlin
+.sdkmanrc

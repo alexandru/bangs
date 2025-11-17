@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.1.20"
-kotlinx-browser = "0.3"
+kotlin = "2.2.21"
+# kotlinx-browser = "0.3"
 
 [libraries]
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-#kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser-wasm-js", version.ref = "kotlinx-browser" }
+# kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+# kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser-wasm-js", version.ref = "kotlinx-browser" }
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
