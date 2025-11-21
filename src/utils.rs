@@ -172,12 +172,15 @@ pub fn remove_bang_from_query(
     let mut last_pos = None;
     let mut matched_len = 0;
     
+    // Convert to chars once for efficiency
+    let query_chars: Vec<char> = query.chars().collect();
+    
     for pattern in &search_patterns {
         if let Some(pos) = query.rfind(pattern) {
             // Check if it's at a word boundary
-            let is_valid_start = pos == 0 || query.chars().nth(pos - 1).map_or(false, |c| c.is_whitespace());
+            let is_valid_start = pos == 0 || query_chars.get(pos.saturating_sub(1)).map_or(false, |c| c.is_whitespace());
             let is_valid_end = pos + pattern.len() >= query.len() || 
-                query.chars().nth(pos + pattern.len()).map_or(false, |c| c.is_whitespace());
+                query_chars.get(pos + pattern.len()).map_or(false, |c| c.is_whitespace());
             
             if is_valid_start && is_valid_end && (last_pos.is_none() || pos > last_pos.unwrap()) {
                 last_pos = Some(pos);
@@ -230,7 +233,7 @@ pub fn redirect_to_url(url: &str, debug: bool) -> Result<(), JsValue> {
 pub fn find_referral(settings: &Settings, url: &str) -> Option<Referral> {
     let browser_id = settings.browser_id.as_ref()?;
     
-    if !url.contains("?") {
+    if url.find('?').is_none() {
         return None;
     }
     
