@@ -1,4 +1,3 @@
-use serde::{Deserialize, Serialize};
 use crate::models::{Bang, Query, Referral};
 
 pub const DEFAULT_BANG_DEFAULT: &str = "g";
@@ -6,14 +5,75 @@ pub const FIREFOX: &str = "firefox";
 pub const FIREFOX_MOBILE: &str = "firefox-mobile";
 pub const VIVALDI: &str = "vivaldi";
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Settings {
-    #[serde(rename = "defaultBang")]
     pub default_bang: String,
-    #[serde(rename = "bangChars")]
     pub bang_chars: String,
-    #[serde(rename = "browserId")]
     pub browser_id: Option<String>,
+}
+
+impl Settings {
+    // Manual JSON serialization to avoid serde_json overhead
+    pub fn to_json(&self) -> String {
+        let browser_id_str = if let Some(ref id) = self.browser_id {
+            format!("\"{}\"", id.replace("\"", "\\\""))
+        } else {
+            "null".to_string()
+        };
+        format!(
+            "{{\"defaultBang\":\"{}\",\"bangChars\":\"{}\",\"browserId\":{}}}",
+            self.default_bang.replace("\"", "\\\""),
+            self.bang_chars.replace("\"", "\\\""),
+            browser_id_str
+        )
+    }
+    
+    // Manual JSON deserialization
+    pub fn from_json(json: &str) -> Option<Self> {
+        // Simple JSON parsing for our specific structure
+        let json = json.trim();
+        if !json.starts_with('{') || !json.ends_with('}') {
+            return None;
+        }
+        
+        let mut default_bang = String::from("g");
+        let mut bang_chars = String::from("!@/");
+        let mut browser_id = None;
+        
+        // Parse each field
+        for part in json[1..json.len()-1].split(',') {
+            let part = part.trim();
+            if let Some(colon_pos) = part.find(':') {
+                let key = part[..colon_pos].trim().trim_matches('"');
+                let value = part[colon_pos+1..].trim();
+                
+                match key {
+                    "defaultBang" => {
+                        if value.starts_with('"') && value.ends_with('"') {
+                            default_bang = value[1..value.len()-1].to_string();
+                        }
+                    }
+                    "bangChars" => {
+                        if value.starts_with('"') && value.ends_with('"') {
+                            bang_chars = value[1..value.len()-1].to_string();
+                        }
+                    }
+                    "browserId" => {
+                        if value != "null" && value.starts_with('"') && value.ends_with('"') {
+                            browser_id = Some(value[1..value.len()-1].to_string());
+                        }
+                    }
+                    _ => {}
+                }
+            }
+        }
+        
+        Some(Settings {
+            default_bang,
+            bang_chars,
+            browser_id,
+        })
+    }
 }
 
 impl Default for Settings {

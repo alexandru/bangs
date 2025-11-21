@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 use crate::models::{Bang, Referral};
 use crate::settings::{Settings, get_queries, get_general_purpose_engines, get_special_purpose_engines, get_referrals};
-use js_sys::{Date, JSON};
+use js_sys::Date;
 
 pub fn encode_uri_component(s: &str) -> String {
     js_sys::encode_uri_component(s).as_string().unwrap_or_default()
@@ -53,11 +53,7 @@ pub fn write_cookie(name: &str, value: &str, days_until_expire: i32) {
 pub fn read_settings_from_cookie() -> Option<Settings> {
     let json_str = read_cookie("settings")?;
     web_sys::console::log_1(&format!("Restoring settings: {}", json_str).into());
-    
-    let json_val = JSON::parse(&json_str).ok()?;
-    let settings: Settings = serde_wasm_bindgen::from_value(json_val).ok()?;
-    
-    Some(settings)
+    Settings::from_json(&json_str)
 }
 
 pub fn override_settings_from_url(settings: &Settings) -> Settings {
@@ -74,10 +70,9 @@ pub fn override_settings_from_url(settings: &Settings) -> Settings {
 
 impl Settings {
     pub fn write_to_cookie(&self) {
-        if let Ok(json) = serde_json::to_string(self) {
-            web_sys::console::log_1(&format!("Saving settings: {}", json).into());
-            write_cookie("settings", &json, 365 * 10);
-        }
+        let json = self.to_json();
+        web_sys::console::log_1(&format!("Saving settings: {}", json).into());
+        write_cookie("settings", &json, 365 * 10);
     }
 }
 

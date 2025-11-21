@@ -35,5 +35,6 @@ src/jsMain/kotlin/generated/
 
 /target
 /pkg
+/dist
 Cargo.lock
 *.old
