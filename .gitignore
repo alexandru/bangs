@@ -29,3 +29,11 @@ src/jsMain/kotlin/generated/
 .idea
 .kotlin
 .sdkmanrc
+
+
+# Added by cargo
+
+/target
+/pkg
+Cargo.lock
+*.old

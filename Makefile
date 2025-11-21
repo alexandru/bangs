@@ -1,29 +1,25 @@
-.PHONY: build dist gen-bangs clean
+.PHONY: build dist clean test
 
 build:
-	./gradlew build
+	wasm-pack build --target web --release
 
-gen-bangs:
-	./gradlew generateBangs
-
-dist:
-	./gradlew jsBrowserDistribution
+dist: build
+	mkdir -p dist
+	cp -r pkg dist/
+	cp index.html dist/
+	cp -r search dist/
+	cp -r src/jsMain/resources/assets dist/ 2>/dev/null || true
+	cp src/jsMain/resources/favicon.ico dist/ 2>/dev/null || true
+	cp src/jsMain/resources/search.xml dist/ 2>/dev/null || true
 
 clean:
-	./gradlew clean
+	cargo clean
+	rm -rf pkg dist
+
+test:
+	cargo test
 
 run-dev:
-	./gradlew jsBrowserDevelopmentRun -t
+	python3 -m http.server 8080
 
-run-prod:
-	./gradlew jsBrowserProductionRun
-
-dependency-updates:
-	./gradlew dependencyUpdates \
-		-Drevision=release \
-		-DoutputFormatter=html \
-		--refresh-dependencies && \
-		open build/dependencyUpdates/report.html
-
-update-gradle:
-	./gradlew wrapper --gradle-version latest
+.DEFAULT_GOAL := build
