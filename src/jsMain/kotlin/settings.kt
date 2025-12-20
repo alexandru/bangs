@@ -89,7 +89,7 @@ val SafeGeneralPurposeEngines = arrayOf(
     // Google
     Bang("https://www.google.com/search?q={{{s}}}&safe=active", "g", "google"),
     // Brave
-    Bang("https://search.brave.com/search?q={{{s}}}&safesearch=strict", "b", "br"),
+    Bang("https://safe.search.brave.com/search?q={{{s}}}", "b", "br"),
     // StartPage
     Bang("https://safe.startpage.com/do/search?query={{{s}}}", "s", "sp"),
     // Qwant

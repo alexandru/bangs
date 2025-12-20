@@ -98,7 +98,7 @@ class ParserTest {
             braveSafe?.keys?.contains("br") ?: false
         }
         assertTrue("find safe brave (url)") {
-            braveSafe?.url?.contains("safesearch=strict") ?: false
+            braveSafe?.url?.contains("safe.search.brave.com") ?: false
         }
 
         val duckSafe = findBangUrlByKey("d", safe=true)
