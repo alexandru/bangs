@@ -47,7 +47,7 @@ class ParserTest {
 
     @Test
     fun testFindSimpleEngineBangs() {
-        val goog = findBangUrlByKey("g")
+        val goog = findBangUrlByKey("g", safe=false)
         assertTrue("find google (1)") {
             goog?.keys?.contains("g") ?: false
         }
@@ -55,7 +55,7 @@ class ParserTest {
             goog?.url?.contains("google.com") ?: false
         }
 
-        val brave = findBangUrlByKey("br")
+        val brave = findBangUrlByKey("br", safe=false)
         assertTrue("find brave (1)") {
             brave?.keys?.contains("br") ?: false
         }
@@ -63,7 +63,7 @@ class ParserTest {
             brave?.url?.contains("search.brave.com") ?: false
         }
 
-        val github = findBangUrlByKey("gh")
+        val github = findBangUrlByKey("gh", safe=false)
         assertTrue("find github (1)") {
             github?.keys?.contains("gh") ?: false
         }
@@ -71,7 +71,7 @@ class ParserTest {
             github?.url?.contains("github.com") ?: false
         }
 
-        val wikipediaByGoogle = findBangUrlByKey("gw")
+        val wikipediaByGoogle = findBangUrlByKey("gw", safe=false)
         assertTrue("find wikipedia by google (1)") {
             wikipediaByGoogle?.keys?.contains("gw") ?: false
         }
@@ -80,6 +80,33 @@ class ParserTest {
         }
         assertTrue("find wikipedia by google (3)") {
             wikipediaByGoogle?.url?.contains("wikipedia.org") ?: false
+        }
+    }
+
+    @Test
+    fun testFindSimpleEngineBangsSafe() {
+        val googSafe = findBangUrlByKey("g", safe=true)
+        assertTrue("find safe google (key)") {
+            googSafe?.keys?.contains("g") ?: false
+        }
+        assertTrue("find safe google (url)") {
+            googSafe?.url?.contains("safe=active") ?: false
+        }
+
+        val braveSafe = findBangUrlByKey("br", safe=true)
+        assertTrue("find safe brave (key)") {
+            braveSafe?.keys?.contains("br") ?: false
+        }
+        assertTrue("find safe brave (url)") {
+            braveSafe?.url?.contains("safe.search.brave.com") ?: false
+        }
+
+        val duckSafe = findBangUrlByKey("d", safe=true)
+        assertTrue("find safe duckduckgo (key)") {
+            duckSafe?.keys?.contains("d") ?: false
+        }
+        assertTrue("find safe duckduckgo (url)") {
+            duckSafe?.url?.contains("safe.duckduckgo.com") ?: false
         }
     }
 }
