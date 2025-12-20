@@ -98,7 +98,7 @@ class ParserTest {
             braveSafe?.keys?.contains("br") ?: false
         }
         assertTrue("find safe brave (url)") {
-            braveSafe?.url?.contains("safe.search.brave.com") ?: false
+            braveSafe?.url?.contains("safesearch=strict") ?: false
         }
 
         val duckSafe = findBangUrlByKey("d", safe=true)
@@ -107,6 +107,30 @@ class ParserTest {
         }
         assertTrue("find safe duckduckgo (url)") {
             duckSafe?.url?.contains("safe.duckduckgo.com") ?: false
+        }
+
+        val startPageSafe = findBangUrlByKey("s", safe=true)
+        assertTrue("find safe startpage (key)") {
+            startPageSafe?.keys?.contains("s") ?: false
+        }
+        assertTrue("find safe startpage (url)") {
+            startPageSafe?.url?.contains("safe.startpage.com") ?: false
+        }
+
+        val qwantSafe = findBangUrlByKey("q", safe=true)
+        assertTrue("find safe qwant (key)") {
+            qwantSafe?.keys?.contains("q") ?: false
+        }
+        assertTrue("find safe qwant (url)") {
+            qwantSafe?.url?.contains("safesearch=2") ?: false
+        }
+
+        val bingSafe = findBangUrlByKey("bi", safe=true)
+        assertTrue("find safe bing (key)") {
+            bingSafe?.keys?.contains("bi") ?: false
+        }
+        assertTrue("find safe bing (url)") {
+            bingSafe?.url?.contains("adlt=strict") ?: false
         }
     }
 }
