@@ -39,7 +39,7 @@
         }
         .search-input, .settings-input {
             padding: 10px;
-            font-size: 14px;
+            font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 8px;
             outline: none;
@@ -58,7 +58,7 @@
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
             margin-left: 10px;
@@ -79,8 +79,9 @@
             background-color: #2a56c6;
         }
         .settings-label {
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
+            margin-top: 5px;
             margin-bottom: 5px;
             text-align: left;
         }
@@ -146,4 +147,23 @@
                 background-color: #0a192f;
                 color: #d8dee9;
             }
-        }</style><script defer="defer" src="bangs.73bb5f9.js"></script></head><body><div id="app"><div class="search-container"><form class="search-form" action="/search/" id="search-form"><input class="search-input" name="q" id="search-input" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus> <button type="submit" class="search-button"><img src="/assets/search.svg" alt="Search"></button></form></div><div class="settings-container" id="settings"><h2>Settings</h2><form class="settings-form" id="settings-form"><label class="settings-label" for="default-bang">Default bang</label> <input class="settings-input" id="default-bang" name="default-bang"> <label class="settings-label" for="bang-chars">Bang chars</label> <input class="settings-input" id="bang-chars" name="bang-chars"> <label class="settings-label" for="browser-id">Browser ID</label> <input class="settings-input" id="browser-id" name="browser-id" placeholder="e.g., firefox, firefox-mobile, vivaldi"></form></div></div><footer><p><span id="build-info"></span> / <a href="https://github.com/alexandru/bangs" target="_blank">View on GitHub</a></p></footer></body></html>
+            .settings-checkbox {
+                background-color: #0a192f;
+                border: 1px solid #4c566a;
+            }
+        }
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .settings-checkbox {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+        .settings-label.checkbox-label {
+            margin: 0;
+            line-height: 1.2;
+        }</style><script defer="defer" src="bangs.e2933b2.js"></script></head><body><div id="app"><div class="search-container"><form class="search-form" action="/search/" id="search-form"><input class="search-input" name="q" id="search-input" placeholder="Search with bangs (e.g., !w for Wikipedia)" autofocus> <button type="submit" class="search-button"><img src="/assets/search.svg" alt="Search"></button></form></div><div class="settings-container" id="settings"><h2>Settings</h2><form class="settings-form" id="settings-form"><label class="settings-label" for="default-bang">Default bang</label> <input class="settings-input" id="default-bang" name="default-bang"> <label class="settings-label" for="bang-chars">Bang chars</label> <input class="settings-input" id="bang-chars" name="bang-chars"> <label class="settings-label" for="browser-id">Browser ID</label> <input class="settings-input" id="browser-id" name="browser-id" placeholder="e.g., firefox, firefox-mobile, vivaldi"><div class="checkbox-row"><input type="checkbox" class="settings-checkbox" id="safe-search" name="safe-search" value="true"> <label class="settings-label checkbox-label" for="safe-search">Safe search</label></div></form></div></div><footer><p><span id="build-info"></span> / <a href="https://github.com/alexandru/bangs" target="_blank">View on GitHub</a></p></footer></body></html>
