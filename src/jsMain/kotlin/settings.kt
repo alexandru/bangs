@@ -1,4 +1,4 @@
-const val DefaultBangDefault = "g"
+const val DefaultBangDefault = "b"
 const val Firefox = "firefox"
 const val FirefoxMobile = "firefox-mobile"
 const val Vivaldi = "vivaldi"
