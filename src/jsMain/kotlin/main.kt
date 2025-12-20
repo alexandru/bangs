@@ -9,7 +9,8 @@ fun triggerSearch() {
     val settings = overrideSettingsFromUrl(readSettingsFromCookie() ?: Settings.default)
     val debug = getQueryParameter("debug") != null
     val rawQuery = getQueryParameter("q")
-    if (rawQuery == null || rawQuery.isEmpty()) {
+
+    if (rawQuery.isNullOrEmpty()) {
         return redirectToUrl(window.location.origin, debug)
     }
 
@@ -18,7 +19,7 @@ fun triggerSearch() {
     var query: String = rawQuery
 
     for (bang in bangs) {
-        foundBang = findBangUrlByKey(bang)
+        foundBang = findBangUrlByKey(bang, settings.safe)
         if (foundBang != null) {
             query = removeBangFromQuery(
                 rawQuery,
@@ -31,8 +32,8 @@ fun triggerSearch() {
     }
 
     if (foundBang == null) {
-        foundBang = findBangUrlByKey(settings.defaultBang) ?:
-                findBangUrlByKey(DefaultBangDefault)!!
+        foundBang = findBangUrlByKey(settings.defaultBang, settings.safe) ?:
+                findBangUrlByKey(DefaultBangDefault, settings.safe)!!
     }
 
     val url = run {
@@ -55,12 +56,21 @@ fun initHomePage() {
             document.getElementById("bang-chars")?.let {
                 (it as HTMLInputElement).value
             } ?: Settings.default.bangChars
+        val safe =
+            document.getElementById("safe-search")?.let {
+                (it as HTMLInputElement).checked
+            } ?: Settings.default.safe
         val browserId =
             document.getElementById("browser-id")?.let {
                 (it as HTMLInputElement).value
             }.nonEmptyOrNull()
 
-        Settings(defaultBang, bangChars, browserId).writeToCookie()
+        Settings(
+            defaultBang = defaultBang,
+            bangChars = bangChars,
+            safe = safe,
+            browserId = browserId
+        ).writeToCookie()
     }
 
     // Initialize search form
@@ -84,6 +94,11 @@ fun initHomePage() {
         val fi = it as HTMLInputElement
         fi.value = settings.bangChars
         fi.addEventListener("input", { _: Event -> onSettingsChanged() })
+    }
+    document.getElementById("safe-search")?.let {
+        val fi = it as HTMLInputElement
+        fi.checked = settings.safe
+        fi.addEventListener("change", { _: Event -> onSettingsChanged() })
     }
     document.getElementById("browser-id")?.let {
         val fi = it as HTMLInputElement

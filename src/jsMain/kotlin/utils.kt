@@ -44,6 +44,7 @@ fun readSettingsFromCookie(): Settings? {
         browserId = (json["browserId"] as String?).nonEmptyOrNull() ?: Settings.default.browserId,
         defaultBang = (json["defaultBang"] as String?).nonEmptyOrNull() ?: Settings.default.defaultBang,
         bangChars = (json["bangChars"] as String?).nonEmptyOrNull() ?: Settings.default.bangChars,
+        safe = (json["safe"] as Boolean?) ?: Settings.default.safe,
     )
 }
 
@@ -51,10 +52,16 @@ fun overrideSettingsFromUrl(settings: Settings): Settings {
     val browserId = getQueryParameter("browserId")
     val defaultBang = getQueryParameter("defaultBang")
     val bangChars = getQueryParameter("bangChars")
+    val safe = getQueryParameter("safe")
     return Settings(
         browserId = browserId ?: settings.browserId,
         defaultBang = defaultBang ?: settings.defaultBang,
         bangChars = bangChars ?: settings.bangChars,
+        safe = when (safe) {
+            "on" -> true
+            "off" -> false
+            else -> settings.safe
+        }
     )
 }
 
@@ -63,6 +70,7 @@ fun Settings.writeToCookie() {
     dict["defaultBang"] = this.defaultBang
     dict["bangChars"] = this.bangChars
     dict["browserId"] = this.browserId
+    dict["safe"] = this.safe
     val json = JSON.stringify(dict)
     console.log("Saving settings: ", json)
     writeCookie("settings", json, daysUntilExpire = 365 * 10)
@@ -96,7 +104,7 @@ fun extractBangsFromQuery(
     return bangs.reversed().toTypedArray()
 }
 
-fun findBangUrlByKey(key: String): Bang? {
+fun findBangUrlByKey(key: String, safe: Boolean): Bang? {
     // Special-purpose searches take precedence
     for (bang in SpecialPurposeEngines) {
         for (bangKey in bang.keys) {
@@ -106,7 +114,8 @@ fun findBangUrlByKey(key: String): Bang? {
         }
     }
     // Search through general-purpose engines
-    for (engine in GeneralPurposeEngines) {
+    val engineList = if (safe) SafeGeneralPurposeEngines else GeneralPurposeEngines
+    for (engine in engineList) {
         for (engineKey in engine.keys) {
             if (engineKey == key)
                 return engine

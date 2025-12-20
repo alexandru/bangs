@@ -82,6 +82,25 @@ val GeneralPurposeEngines = arrayOf(
     Bang("https://www.bing.com/search?q={{{s}}}", "bi", "bing"),
 )
 
+/**
+ * Safe search versions of [GeneralPurposeEngines].
+ */
+val SafeGeneralPurposeEngines = arrayOf(
+    // Google
+    Bang("https://www.google.com/search?q={{{s}}}&safe=active", "g", "google"),
+    // Brave
+    Bang("https://safe.search.brave.com/search?q={{{s}}}", "b", "br"),
+    // StartPage
+    Bang("https://safe.startpage.com/do/search?query={{{s}}}", "s", "sp"),
+    // Qwant
+    Bang("https://www.qwant.com/?s=2&q={{{s}}}&safesearch=2", "q", "qw"),
+    // DuckDuckGo
+    Bang("https://safe.duckduckgo.com/?q={{{s}}}", "d", "ddg"),
+    // Bing
+    Bang("https://www.bing.com/search?q={{{s}}}&adlt=strict", "bi", "bing"),
+)
+
+
 val SpecialPurposeEngines = arrayOf(
     // Google
     Bang("https://google.com/maps/place/{{{s}}}", "gm", "gmaps"),

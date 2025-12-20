@@ -1,13 +1,15 @@
 data class Settings(
     val defaultBang: String,
     val bangChars: String,
-    val browserId: String?
+    val safe: Boolean,
+    val browserId: String?,
 ) {
     companion object{
         val default = Settings(
-            defaultBang = "g",
+            defaultBang = "b",
             bangChars = "!@/",
-            browserId = null
+            safe = true,
+            browserId = null,
         )
     }
 }
