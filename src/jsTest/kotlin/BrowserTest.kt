@@ -13,6 +13,7 @@ class BrowserTest {
         val settings = Settings(
             defaultBang = "blah",
             bangChars = "!@/",
+            safe = false,
             browserId = null
         )
         settings.writeToCookie()
