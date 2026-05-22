@@ -3,7 +3,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("com.github.ben-manes.versions") version "0.53.0"
+    id("com.github.ben-manes.versions") version "0.54.0"
 }
 
 group = "org.alexn.bangs"
@@ -21,9 +21,7 @@ kotlin {
 
             commonWebpackConfig {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        add(project.rootDir.path)
-                    }
+                    static(project.rootDir.path)
                 }
                 cssSupport {
                     enabled.set(false)
@@ -53,11 +51,13 @@ kotlin {
     }
 }
 
+val generatedSourcesDir = layout.projectDirectory.dir("src/jsMain/kotlin/generated")
+
 tasks.register("generateGitCommitSha") {
+    val outputFile = generatedSourcesDir.file("build-info.kt")
+
     doLast {
-        val generatedDir = File(project.layout.projectDirectory.asFile, "src/jsMain/kotlin/generated")
-        val outputFile = File(generatedDir, "build-info.kt")
-        val tempFile = File(temporaryDir, "git-sha.txt")
+        val generatedDir = generatedSourcesDir.asFile
 
         if (!generatedDir.exists()) {
             generatedDir.mkdirs()
@@ -73,7 +73,7 @@ tasks.register("generateGitCommitSha") {
             gitOutput.trim().take(7)
         }
 
-        outputFile.writeText(
+        outputFile.asFile.writeText(
             """
             package generated
             
@@ -101,7 +101,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile> {
 // Add generated directory to clean task
 tasks.named("clean") {
     doLast {
-        delete(File(project.layout.projectDirectory.asFile, "src/jsMain/kotlin/generated"))
+        delete(generatedSourcesDir)
     }
 }
 
