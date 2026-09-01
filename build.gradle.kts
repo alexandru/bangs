@@ -3,7 +3,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("com.github.ben-manes.versions") version "0.54.0"
+    id("io.github.ben-manes.versions") version "0.54.0"
 }
 
 group = "org.alexn.bangs"
@@ -14,7 +14,7 @@ repositories {
 }
 
 kotlin {
-    js(IR) {
+    js {
         binaries.executable()
         browser {
             outputModuleName = "bangs"
@@ -37,13 +37,13 @@ kotlin {
     }
 
     sourceSets {
-        val jsMain by getting {
+        named("jsMain") {
             dependencies {
                 implementation(kotlin("stdlib-js"))
                 implementation(devNpm("html-webpack-plugin", version = "5.6.3"))
             }
         }
-        val jsTest by getting {
+        named("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
             }
