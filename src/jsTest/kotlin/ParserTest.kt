@@ -84,6 +84,30 @@ class ParserTest {
     }
 
     @Test
+    fun testFindMarginaliaSearchBang() {
+        assertEquals(
+            "https://marginalia-search.com/search?query={{{s}}}",
+            findBangUrlByKey("ma", safe=false)?.url,
+        )
+        assertEquals(
+            "https://marginalia-search.com/search?query={{{s}}}&nsfw=smut",
+            findBangUrlByKey("ma", safe=true)?.url,
+        )
+    }
+
+    @Test
+    fun testFindMojeekBang() {
+        assertEquals(
+            "https://www.mojeek.com/search?q={{{s}}}",
+            findBangUrlByKey("mo", safe=false)?.url,
+        )
+        assertEquals(
+            "https://www.mojeek.com/search?q={{{s}}}&safe=1",
+            findBangUrlByKey("mo", safe=true)?.url,
+        )
+    }
+
+    @Test
     fun testFindSimpleEngineBangsSafe() {
         val googSafe = findBangUrlByKey("g", safe=true)
         assertTrue("find safe google (key)") {

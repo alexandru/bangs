@@ -80,6 +80,10 @@ val GeneralPurposeEngines = arrayOf(
     Bang("https://duckduckgo.com/?q={{{s}}}", "d", "ddg"),
     // Bing
     Bang("https://www.bing.com/search?q={{{s}}}", "bi", "bing"),
+    // Marginalia Search
+    Bang("https://marginalia-search.com/search?query={{{s}}}", "ma"),
+    // Mojeek
+    Bang("https://www.mojeek.com/search?q={{{s}}}", "mo"),
 )
 
 /**
@@ -98,6 +102,10 @@ val SafeGeneralPurposeEngines = arrayOf(
     Bang("https://safe.duckduckgo.com/?q={{{s}}}", "d", "ddg"),
     // Bing
     Bang("https://www.bing.com/search?q={{{s}}}&adlt=strict", "bi", "bing"),
+    // Marginalia Search
+    Bang("https://marginalia-search.com/search?query={{{s}}}&nsfw=smut", "ma"),
+    // Mojeek
+    Bang("https://www.mojeek.com/search?q={{{s}}}&safe=1", "mo"),
 )
 
 
