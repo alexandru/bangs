@@ -3,7 +3,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("io.github.ben-manes.versions") version "0.54.0"
+    id("io.github.ben-manes.versions") version "0.61.0"
 }
 
 group = "org.alexn.bangs"
