@@ -18,6 +18,10 @@ BUILD_TAG := unknown
 endif
 # Must match the `wasm-bindgen` version pinned in Cargo.toml exactly.
 BINDGEN_VERSION := 0.2.129
+# Resolved when the Makefile is parsed; falls back to cargo's install
+# location ($CARGO_HOME/bin, default ~/.cargo/bin) so `make dist` works even
+# when that directory is not on PATH (ensure-bindgen installs there).
+WASM_BINDGEN := $(shell command -v wasm-bindgen 2>/dev/null || echo "$${CARGO_HOME:-$$HOME/.cargo}/bin/wasm-bindgen")
 
 .PHONY: all build dist test test-wasm ensure-wasm-target ensure-bindgen install-bindgen serve clean
 
@@ -32,18 +36,16 @@ ensure-wasm-target:
 build: ensure-wasm-target
 	cargo build --release --target $(TARGET)
 
-# Installs the wasm-bindgen CLI when missing, or when the installed version
-# differs from the pinned one (the CLI and the crate must match exactly).
+# Installs the wasm-bindgen CLI when it is missing or its version differs
+# from the pinned one (the CLI and the crate must match exactly).
 ensure-bindgen:
-	@if ! command -v wasm-bindgen >/dev/null 2>&1; then \
-		$(MAKE) install-bindgen; \
-	elif ! wasm-bindgen --version | grep -q "$(BINDGEN_VERSION)"; then \
+	@if ! $(WASM_BINDGEN) --version 2>/dev/null | grep -q "$(BINDGEN_VERSION)"; then \
 		$(MAKE) install-bindgen; \
 	fi
 
 dist: build ensure-bindgen
 	mkdir -p $(DIST)/bangs-$(BUILD_TAG) $(DIST)/search $(DIST)/assets
-	wasm-bindgen --target web --no-typescript \
+	$(WASM_BINDGEN) --target web --no-typescript \
 		--out-dir $(DIST)/bangs-$(BUILD_TAG) \
 		target/$(TARGET)/release/bangs.wasm
 	cp static/main.js $(DIST)/bangs-$(BUILD_TAG)/main.js
