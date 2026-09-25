@@ -1,0 +1,5 @@
+# Runs `cargo test --target wasm32-unknown-unknown` through the wasm-bindgen
+# test harness. Requires wasm-bindgen-cli of the same version as the
+# wasm-bindgen crate; see `make install-bindgen`.
+[target.wasm32-unknown-unknown]
+runner = "wasm-bindgen-test-runner"

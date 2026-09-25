@@ -3,30 +3,42 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   build:
-    name: Build Kotlin/JS
+    name: Build Rust/WASM
     runs-on: ubuntu-latest
     steps:
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '21'
-
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Compile and Test
-      run: ./gradlew check
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: wasm32-unknown-unknown
+
+    - name: Cache cargo build
+      uses: Swatinem/rust-cache@v2
+
+    - name: Install wasm-bindgen CLI
+      run: make install-bindgen
+
+    - name: Compile and test
+      run: make test
+
+    - name: Browser tests
+      run: |
+        if [ -d "$CHROMEWEBDRIVER" ]; then
+          export CHROMEDRIVER="$CHROMEWEBDRIVER/chromedriver"
+        fi
+        make test-wasm
 
     - name: Build distribution
-      run: ./gradlew jsBrowserDistribution
+      run: make dist
 
     - name: Fix permissions
       run: |
-        chmod -v -R +rX "build/dist/js/productionExecutable/" | while read line; do
+        chmod -v -R +rX "dist/" | while read line; do
           echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
 

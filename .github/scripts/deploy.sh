@@ -15,7 +15,7 @@ rm -rf "$TEMP_DIR"
 git clone "https://$GITHUB_TOKEN@$GITHUB_REPOSITORY" "$TEMP_DIR" -b gh-pages
 
 echo "Copying build output to temporary directory"
-rsync --filter='P .*' --delete-excluded -Pacv ./build/dist/js/productionExecutable/ "$TEMP_DIR"
+rsync --filter='P .*' --delete-excluded -Pacv ./dist/ "$TEMP_DIR"
 
 echo "Pushing to gh-pages"
 cd "$TEMP_DIR" || exit 1
