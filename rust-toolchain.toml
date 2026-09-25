@@ -1,0 +1,6 @@
+# Toolchain resolved by rustup inside this repository.
+# `targets` makes rustup auto-install the wasm32 standard library on fresh
+# clones, so `make build` works without a manual `rustup target add`.
+[toolchain]
+channel = "stable"
+targets = ["wasm32-unknown-unknown"]
