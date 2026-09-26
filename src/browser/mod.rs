@@ -13,12 +13,17 @@ use crate::cookie;
 use crate::settings::Settings;
 use crate::url_codec;
 
+/// Small global allocator for the wasm target; saves the ~5 KB of binary
+/// that std's dlmalloc would occupy.
+#[cfg(not(target_feature = "atomics"))]
+#[global_allocator]
+static ALLOCATOR: talc::wasm::WasmDynamicTalc = talc::wasm::new_wasm_dynamic_allocator();
+
 /// Entry point the generated JS bootstrap (`static/main.js`) calls once the
 /// wasm module is instantiated. Runs the search flow on `/search/`, and
 /// wires the home page otherwise.
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
-    console_error_panic_hook::set_once();
     let Some(window) = web_sys::window() else {
         return Err(JsValue::from_str("no global `window` available"));
     };
