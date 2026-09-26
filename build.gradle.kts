@@ -16,6 +16,9 @@ repositories {
 kotlin {
     js {
         binaries.executable()
+        compilerOptions {
+            target = "es2015"
+        }
         browser {
             outputModuleName = "bangs"
 

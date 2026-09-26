@@ -8,6 +8,16 @@ config.plugins = config.plugins || [];
 config.plugins.push(
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../../../../build/processedResources/js/main/index.html"),
+        minify: config.mode === "production" ? {
+            collapseWhitespace: true,
+            keepClosingSlash: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+            minifyCSS: true,
+        } : false,
     }),
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../../../../build/processedResources/js/main/search/index.html"),
