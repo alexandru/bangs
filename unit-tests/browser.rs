@@ -33,3 +33,9 @@ fn read_and_write_settings() {
     write_settings(&window(), &settings).expect("settings write");
     assert_eq!(Some(settings), read_settings(&window()));
 }
+
+#[wasm_bindgen_test]
+fn malformed_settings_cookie_yields_no_settings() {
+    write_cookie(&window(), "settings", "{not json", 1).expect("cookie write");
+    assert_eq!(None, read_settings(&window()));
+}

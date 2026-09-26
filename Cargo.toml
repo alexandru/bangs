@@ -14,8 +14,6 @@ crate-type = ["cdylib", "rlib"]
 # version as this crate.
 wasm-bindgen = "=0.2.129"
 js-sys = "0.3"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
 console_error_panic_hook = "0.1"
 
 [dependencies.web-sys]
@@ -37,8 +35,11 @@ features = [
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
 
+# Size-first profile: this ships to browsers, and the logic is cold-path
+# (a redirect decision per page load), so `opt-level = "z"` beats speed
+# levels. `make dist` runs wasm-opt on top of this.
 [profile.release]
-opt-level = 3
+opt-level = "z"
 lto = "fat"
 codegen-units = 1
 panic = "abort"
