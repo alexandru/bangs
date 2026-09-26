@@ -3,10 +3,6 @@
 //! and `decodeURIComponent`), plus the raw scan of `location.search` /
 //! `location.hash`.
 
-/// Characters `encodeURIComponent` leaves untouched, besides ASCII letters
-/// and digits: `-_.!~*'()`.
-const ENCODE_URI_COMPONENT_SAFE: [u8; 9] = *b"-_.!~*'()";
-
 /// Encodes a string like JavaScript's `encodeURIComponent`: every character
 /// other than ASCII letters, digits, and `-_.!~*'()` becomes percent-encoded
 /// UTF-8 bytes with uppercase hex digits.
@@ -95,6 +91,10 @@ pub fn decode_query_value(raw: &str) -> Option<String> {
         Some(trimmed.to_owned())
     }
 }
+
+/// Characters `encodeURIComponent` leaves untouched, besides ASCII letters
+/// and digits: `-_.!~*'()`.
+const ENCODE_URI_COMPONENT_SAFE: [u8; 9] = *b"-_.!~*'()";
 
 /// Maps a hex digit to its numeric value; `None` for anything else.
 fn hex_value(byte: u8) -> Option<u8> {

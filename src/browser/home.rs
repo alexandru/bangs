@@ -61,7 +61,7 @@ fn init_settings_form(window: &Window) {
     let Some(document) = window.document() else {
         return;
     };
-    let settings = read_settings(window).unwrap_or_else(Settings::default);
+    let settings = read_settings(window).unwrap_or_default();
 
     let text_fields = [
         ("default-bang", settings.default_bang.clone()),

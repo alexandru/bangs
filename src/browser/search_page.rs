@@ -9,7 +9,7 @@ use crate::settings::Settings;
 
 /// Reads the query, resolves it against the engine registry, and redirects.
 pub fn trigger_search(window: &Window) -> Result<(), JsValue> {
-    let stored = read_settings(window).unwrap_or_else(Settings::default);
+    let stored = read_settings(window).unwrap_or_default();
     let settings = override_settings_from_url(window, &stored)?;
     let debug = get_query_parameter(window, "debug")?.is_some();
     let Some(raw_query) = get_query_parameter(window, "q")? else {

@@ -365,9 +365,8 @@ pub fn find_bang(key: &str, safe: bool) -> Option<Bang> {
             if *engine_key == key {
                 return Some(engine.to_bang());
             }
-            if key.starts_with(engine_key) {
+            if let Some(subkey) = key.strip_prefix(engine_key) {
                 // Sub-key lookup: "gw" = "g" + "w" (Google + Wikipedia).
-                let subkey = &key[engine_key.len()..];
                 for query in QUERIES {
                     if query.keys.contains(&subkey) {
                         return Some(Bang {

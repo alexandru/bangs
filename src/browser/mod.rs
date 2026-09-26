@@ -13,12 +13,6 @@ use crate::cookie;
 use crate::settings::Settings;
 use crate::url_codec;
 
-/// Small global allocator for the wasm target; saves the ~5 KB of binary
-/// that std's dlmalloc would occupy.
-#[cfg(not(target_feature = "atomics"))]
-#[global_allocator]
-static ALLOCATOR: talc::wasm::WasmDynamicTalc = talc::wasm::new_wasm_dynamic_allocator();
-
 /// Entry point the generated JS bootstrap (`static/main.js`) calls once the
 /// wasm module is instantiated. Runs the search flow on `/search/`, and
 /// wires the home page otherwise.
@@ -159,6 +153,12 @@ pub fn redirect_to_url(window: &Window, url: &str, debug: bool) -> Result<(), Js
     window.location().replace(url)?;
     Ok(())
 }
+
+/// Small global allocator for the wasm target; saves the ~5 KB of binary
+/// that std's dlmalloc would occupy.
+#[cfg(not(target_feature = "atomics"))]
+#[global_allocator]
+static ALLOCATOR: talc::wasm::WasmDynamicTalc = talc::wasm::new_wasm_dynamic_allocator();
 
 /// Reads a string field from a parsed JSON value; missing, null, or
 /// wrongly-typed fields yield `None`.
