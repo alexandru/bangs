@@ -14,11 +14,10 @@ dist
 # Contains mutation testing data
 **/mutants.out*/
 
-# RustRover
+# IDEs
 .idea/
-
-# VS Code
 .vscode/
+.zed/
 
 # macOS
 .DS_Store
