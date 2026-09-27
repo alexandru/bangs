@@ -6,7 +6,6 @@ use wasm_bindgen::{JsCast, JsValue, closure::Closure};
 use web_sys::{Document, Event, HtmlInputElement, HtmlSpanElement, Window};
 
 use crate::browser::{get_query_parameter, read_settings, redirect_to_url};
-use crate::build_info::BUILD_GIT_COMMIT_SHA;
 use crate::models::Settings;
 use crate::utils;
 
@@ -155,6 +154,13 @@ fn init_settings_form(window: &Window) {
     checkbox.set_checked(settings.safe);
     persist_on_change(window, &checkbox, "change");
 }
+
+/// Short git commit SHA of the build, shown in the home page footer.
+/// Falls back to `"unknown"` outside a git checkout.
+const BUILD_GIT_COMMIT_SHA: &str = match option_env!("BANGS_BUILD_GIT_COMMIT_SHA") {
+    Some(sha) => sha,
+    None => "unknown",
+};
 
 /// Shows the build's git commit SHA in the footer.
 fn init_build_info(window: &Window) {

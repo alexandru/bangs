@@ -49,7 +49,7 @@ ensure-wasm-target:
 	@if command -v rustup >/dev/null 2>&1; then rustup target add $(TARGET); fi
 
 build: ensure-wasm-target
-	cargo build --release --target $(TARGET)
+	BANGS_BUILD_GIT_COMMIT_SHA=$(BUILD_TAG) cargo build --release --target $(TARGET)
 
 # Installs the wasm-bindgen CLI when it is missing or its version differs
 # from the pinned one (the CLI and the crate must match exactly).

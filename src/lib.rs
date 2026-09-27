@@ -11,7 +11,6 @@
 //! [`browser`] the DOM glue; both compile only for wasm, since they
 //! cannot run outside a browser.
 
-pub mod build_info;
 pub mod models;
 pub mod settings;
 pub mod utils;
