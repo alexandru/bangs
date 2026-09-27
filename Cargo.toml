@@ -40,9 +40,13 @@ wasm-bindgen-test = "0.3"
 # Size-first profile: this ships to browsers, and the logic is cold-path
 # (a redirect decision per page load), so `opt-level = "z"` beats speed
 # levels. `make dist` runs wasm-opt on top of this.
+#
+# Debug info never ships: it is intermediate input for the source map, and
+# `make dist` strips it from the final binary.
 [profile.release]
 opt-level = "z"
 lto = "fat"
 codegen-units = 1
 panic = "abort"
-strip = true
+strip = false
+debug = true

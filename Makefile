@@ -37,8 +37,10 @@ WASM_BINDGEN := $(shell command -v wasm-bindgen 2>/dev/null || echo "$${CARGO_HO
 # Downloaded once into the user cache and reused afterwards. The tarball's
 # top-level directory is binaryen-version_<v>/ on every platform.
 WASM_OPT := $(HOME)/.cache/bangs/binaryen-version_$(BINARYEN_VERSION)/bin/wasm-opt
+WASM2MAP_VERSION := 0.1.0
+WASM2MAP := $(shell command -v cargo-wasm2map 2>/dev/null || echo "$${CARGO_HOME:-$$HOME/.cargo}/bin/cargo-wasm2map")
 
-.PHONY: all build dist test test-wasm ensure-wasm-target ensure-bindgen ensure-wasm-opt ensure-nightly install-bindgen format serve clean
+.PHONY: all build dist test test-wasm ensure-wasm-target ensure-bindgen ensure-wasm-opt ensure-wasm2map ensure-nightly install-bindgen format serve clean
 
 all: dist
 
@@ -69,15 +71,35 @@ ensure-wasm-opt:
 			| tar -xz -C $(HOME)/.cache/bangs; \
 	fi
 
-dist: build ensure-bindgen ensure-wasm-opt
+# Installs the DWARF-to-source-map converter when missing.
+ensure-wasm2map:
+	@if ! test -x "$(WASM2MAP)"; then \
+		cargo install cargo-wasm2map --locked --version $(WASM2MAP_VERSION); \
+	fi
+
+dist: build ensure-bindgen ensure-wasm-opt ensure-wasm2map
 	mkdir -p $(DIST)/bangs-$(BUILD_TAG) $(DIST)/search $(DIST)/assets
-	$(WASM_BINDGEN) --target web --no-typescript \
+	$(WASM_BINDGEN) --target web --no-typescript --keep-debug \
 		--out-dir $(DIST)/bangs-$(BUILD_TAG) \
 		target/$(TARGET)/release/bangs.wasm
+	# cargo-wasm2map writes only into an existing file. Invoked directly (not
+	# through `cargo`), it still expects its subcommand name as the first
+	# argument, so pass the literal `wasm2map` token.
+	touch $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.pre.map
+	$(WASM2MAP) wasm2map $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.wasm \
+		-m $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.pre.map
+	python3 scripts/fix-source-map.py . $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.pre.map
+	# DevTools ignores source maps while the wasm still has DWARF, so the
+	# final binary ships without it.
 	$(WASM_OPT) -Oz --enable-bulk-memory \
+		--input-source-map $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.pre.map \
+		--output-source-map $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.wasm.map \
+		--output-source-map-url bangs_bg.wasm.map \
+		--strip-dwarf \
 		$(DIST)/bangs-$(BUILD_TAG)/bangs_bg.wasm \
 		-o $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.opt.wasm
 	mv $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.opt.wasm $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.wasm
+	rm -f $(DIST)/bangs-$(BUILD_TAG)/bangs_bg.pre.map
 	cp static/main.js $(DIST)/bangs-$(BUILD_TAG)/main.js
 	cp static/index.html $(DIST)/index.html
 	cp static/search/index.html $(DIST)/search/index.html
