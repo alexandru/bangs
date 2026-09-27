@@ -38,7 +38,7 @@ WASM_BINDGEN := $(shell command -v wasm-bindgen 2>/dev/null || echo "$${CARGO_HO
 # top-level directory is binaryen-version_<v>/ on every platform.
 WASM_OPT := $(HOME)/.cache/bangs/binaryen-version_$(BINARYEN_VERSION)/bin/wasm-opt
 
-.PHONY: all build dist test test-wasm ensure-wasm-target ensure-bindgen ensure-wasm-opt install-bindgen serve clean
+.PHONY: all build dist test test-wasm ensure-wasm-target ensure-bindgen ensure-wasm-opt ensure-nightly install-bindgen format serve clean
 
 all: dist
 
@@ -96,7 +96,14 @@ test-wasm: ensure-wasm-target
 install-bindgen:
 	cargo install wasm-bindgen-cli --locked --force --version $(BINDGEN_VERSION)
 
-format:
+# Nightly is only used for rustfmt, so the minimal profile keeps the
+# download small.
+ensure-nightly:
+	@if command -v rustup >/dev/null 2>&1 && ! rustup toolchain list | grep -q nightly; then \
+		rustup toolchain install nightly --profile minimal --component rustfmt; \
+	fi
+
+format: ensure-nightly
 	cargo +nightly fmt --all
 
 serve: dist

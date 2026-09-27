@@ -11,8 +11,8 @@ use crate::models::Settings;
 use crate::utils;
 
 /// Entry point the generated JS bootstrap (`static/main.js`) calls once the
-/// wasm module is instantiated. Runs the search flow on `/search/`, and
-/// wires the home page otherwise.
+/// wasm module is instantiated. Runs the search flow on `/search/`, and wires
+/// the home page otherwise.
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
     let Some(window) = web_sys::window() else {
