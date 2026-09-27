@@ -96,6 +96,9 @@ test-wasm: ensure-wasm-target
 install-bindgen:
 	cargo install wasm-bindgen-cli --locked --force --version $(BINDGEN_VERSION)
 
+format:
+	cargo +nightly fmt --all
+
 serve: dist
 	python3 -m http.server 8080 --directory $(DIST)
 
