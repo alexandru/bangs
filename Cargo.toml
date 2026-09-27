@@ -1,3 +1,6 @@
+[workspace]
+members = ["xtask"]
+
 [package]
 name = "bangs"
 version = "1.0.0"
@@ -9,9 +12,9 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-# Must match `BINDGEN_VERSION` in the Makefile exactly: the generated JS
-# glue is only guaranteed to work against a wasm-bindgen CLI of the same
-# version as this crate.
+# The generated JS glue only works against a wasm-bindgen CLI of the same
+# version as this crate; `cargo xtask dist` installs it, deriving the
+# version from Cargo.lock.
 wasm-bindgen = "=0.2.129"
 js-sys = "0.3"
 # Lean replacement for the std default allocator (dlmalloc, several KB of
@@ -39,10 +42,10 @@ wasm-bindgen-test = "0.3"
 
 # Size-first profile: this ships to browsers, and the logic is cold-path
 # (a redirect decision per page load), so `opt-level = "z"` beats speed
-# levels. `make dist` runs wasm-opt on top of this.
+# levels. `cargo xtask dist` runs wasm-opt on top of this.
 #
 # Debug info never ships: it is intermediate input for the source map, and
-# `make dist` strips it from the final binary.
+# `cargo xtask dist` strips it from the final binary.
 [profile.release]
 opt-level = "z"
 lto = "fat"

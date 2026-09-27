@@ -20,21 +20,18 @@ jobs:
     - name: Cache cargo build
       uses: Swatinem/rust-cache@v2
 
-    - name: Install wasm-bindgen CLI
-      run: make install-bindgen
-
     - name: Compile and test
-      run: make test
+      run: cargo test
+
+    - name: Build distribution
+      run: cargo xtask dist
 
     - name: Browser tests
       run: |
         if [ -d "$CHROMEWEBDRIVER" ]; then
           export CHROMEDRIVER="$CHROMEWEBDRIVER/chromedriver"
         fi
-        make test-wasm
-
-    - name: Build distribution
-      run: make dist
+        cargo test --target wasm32-unknown-unknown
 
     - name: Fix permissions
       run: |
