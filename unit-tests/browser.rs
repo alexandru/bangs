@@ -9,7 +9,7 @@ use wasm_bindgen_test::{wasm_bindgen_test, wasm_bindgen_test_configure};
 use web_sys::Window;
 
 use super::{read_cookie, read_settings, write_cookie, write_settings};
-use crate::settings::Settings;
+use crate::models::Settings;
 
 wasm_bindgen_test_configure!(run_in_browser);
 

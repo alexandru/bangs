@@ -1,16 +1,90 @@
-//! The home page: wires the search form, the settings form, and the build
-//! info footer.
+//! Page-level logic: the entry point and the wiring of the home (`/`) and
+//! search (`/search/`) pages.
 
-use wasm_bindgen::{JsCast, closure::Closure};
+use wasm_bindgen::prelude::wasm_bindgen;
+use wasm_bindgen::{JsCast, JsValue, closure::Closure};
 use web_sys::{Document, Event, HtmlInputElement, HtmlSpanElement, Window};
 
-use crate::browser::{read_settings, write_settings};
+use crate::browser::{get_query_parameter, read_settings, redirect_to_url};
 use crate::build_info::BUILD_GIT_COMMIT_SHA;
-use crate::settings::Settings;
-use crate::url_codec;
+use crate::models::Settings;
+use crate::utils;
+
+/// Entry point the generated JS bootstrap (`static/main.js`) calls once the
+/// wasm module is instantiated. Runs the search flow on `/search/`, and
+/// wires the home page otherwise.
+#[wasm_bindgen]
+pub fn start() -> Result<(), JsValue> {
+    let Some(window) = web_sys::window() else {
+        return Err(JsValue::from_str("no global `window` available"));
+    };
+    let on_search_page = window
+        .location()
+        .pathname()
+        .map(|path| path.starts_with("/search/"))
+        .unwrap_or(false);
+    if on_search_page {
+        return trigger_search(&window);
+    }
+    // The wasm module may finish loading after the DOM has been parsed, in
+    // which case `DOMContentLoaded` would never fire; only wait while the
+    // document is still loading.
+    let ready = window
+        .document()
+        .map(|document| document.ready_state() != "loading")
+        .unwrap_or(false);
+    if ready {
+        init_home_page(&window);
+        return Ok(());
+    }
+    let Some(document) = window.document() else {
+        return Err(JsValue::from_str("no `document` available"));
+    };
+    let on_ready: Closure<dyn FnMut(Event)> = {
+        let window = window.clone();
+        Closure::wrap(Box::new(move |_: Event| init_home_page(&window)) as Box<dyn FnMut(Event)>)
+    };
+    let listener: &js_sys::Function = on_ready.as_ref().unchecked_ref();
+    document.add_event_listener_with_callback("DOMContentLoaded", listener)?;
+    // Page-lifetime listener: forgetting the closure keeps it registered,
+    // matching the plain JS listeners of the original app.
+    on_ready.forget();
+    Ok(())
+}
+
+/// Reads the query, resolves it against the engine registry, and redirects.
+fn trigger_search(window: &Window) -> Result<(), JsValue> {
+    let stored = read_settings(window).unwrap_or_default();
+    let settings = override_settings_from_url(window, &stored)?;
+    let debug = get_query_parameter(window, "debug")?.is_some();
+    let Some(raw_query) = get_query_parameter(window, "q")? else {
+        // Empty or missing query: go home.
+        return redirect_to_origin(window, debug);
+    };
+    match utils::resolve_target_url(&raw_query, &settings) {
+        Some(url) => redirect_to_url(window, &url, debug),
+        // Unreachable while the registry keeps the fallback default bang.
+        None => redirect_to_origin(window, debug),
+    }
+}
+
+/// Applies the `browserId`, `defaultBang`, `bangChars`, and `safe` URL
+/// parameters on top of the stored settings.
+fn override_settings_from_url(window: &Window, settings: &Settings) -> Result<Settings, JsValue> {
+    let browser_id = get_query_parameter(window, "browserId")?;
+    let default_bang = get_query_parameter(window, "defaultBang")?;
+    let bang_chars = get_query_parameter(window, "bangChars")?;
+    let safe =
+        get_query_parameter(window, "safe")?.and_then(|raw| crate::models::parse_safe_flag(&raw));
+    Ok(settings.with_url_overrides(browser_id, default_bang, bang_chars, safe))
+}
+
+fn redirect_to_origin(window: &Window, debug: bool) -> Result<(), JsValue> {
+    redirect_to_url(window, &window.location().origin()?, debug)
+}
 
 /// Wires all home-page controls once the DOM is ready.
-pub fn init_home_page(window: &Window) {
+fn init_home_page(window: &Window) {
     init_search_form(window);
     init_settings_form(window);
     init_build_info(window);
@@ -35,10 +109,7 @@ fn init_search_form(window: &Window) {
             // the Kotlin handler did.
             if !input.value().trim().is_empty() {
                 event.prevent_default();
-                let href = format!(
-                    "/search/#q={}",
-                    url_codec::encode_uri_component(&input.value())
-                );
+                let href = format!("/search/#q={}", utils::encode_uri_component(&input.value()));
                 if let Err(error) = window.location().set_href(&href) {
                     web_sys::console::error_1(&error);
                 }
@@ -131,7 +202,7 @@ fn persist_current_settings(window: &Window) {
             .unwrap_or(defaults.safe),
         browser_id: text_value(&document, "browser-id").filter(|value| !value.is_empty()),
     };
-    if let Err(error) = write_settings(window, &settings) {
+    if let Err(error) = crate::browser::write_settings(&window, &settings) {
         web_sys::console::error_1(&error);
     }
 }
