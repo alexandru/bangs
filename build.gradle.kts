@@ -3,7 +3,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("io.github.ben-manes.versions") version "0.61.0"
+    id("io.github.ben-manes.versions") version "0.67.0"
 }
 
 group = "org.alexn.bangs"
@@ -43,7 +43,7 @@ kotlin {
         named("jsMain") {
             dependencies {
                 implementation(kotlin("stdlib-js"))
-                implementation(devNpm("html-webpack-plugin", version = "5.6.3"))
+                implementation(devNpm("html-webpack-plugin", version = "5.6.8"))
             }
         }
         named("jsTest") {

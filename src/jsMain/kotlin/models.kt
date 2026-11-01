@@ -6,7 +6,7 @@ data class Settings(
 ) {
     companion object{
         val default = Settings(
-            defaultBang = "b",
+            defaultBang = "g",
             bangChars = "!@/",
             safe = true,
             browserId = null,
